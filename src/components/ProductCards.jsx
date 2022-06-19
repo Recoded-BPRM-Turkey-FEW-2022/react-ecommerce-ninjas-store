@@ -18,53 +18,59 @@ const ProductCards = () => {
             .then((json) => setProducts(json));
     };
     return (
-        <div>
+        <div style={{ width: "100%" }}>
             <h1>LATEST PRODUCTS</h1>
-            {products.map((item) => (
-                <Box
-                    sx={{
-                        display: "flex",
-                        flexDirection: "row",
-                        justifyContent: "center",
-                    }}
-                >
-                    <CardActionArea>
-                        <Card
-                            sx={{
-                                maxWidth: 345,
-                                paddingLeft: 10,
-                                paddingRight: 10,
-                                paddingTop: 15,
-                                paddingBottom: 10,
-                                background: "beige",
-                            }}
-                        >
+
+            <Box
+                sx={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "10px",
+                }}
+            >
+                {products.map((item) => (
+                    <Card
+                        sx={{
+                            width: 200,
+                            height: 300,
+                            paddingLeft: 2,
+                            paddingRight: 2,
+                            paddingTop: 2,
+                            paddingBottom: 2,
+                            background: "beige",
+                        }}
+                    >
+                        <CardActionArea>
                             <CardMedia
                                 component="img"
-                                height="300"
-                                width="100"
+                                height="130"
+                                width="50"
                                 image={item.image}
                             />
-                            <CardContent>
-                                <Typography
-                                    gutterBottom
-                                    variant="h6"
-                                    component="div"
-                                >
-                                    {item.title}
-                                </Typography>
-                                <Typography
-                                    gutterBottom
-                                    variant="p"
-                                    component="div"
-                                >
-                                    {item.price}
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </CardActionArea>
-                </Box>
-            ))}
+                        </CardActionArea>
+
+                        <CardContent>
+                            <Typography
+                                gutterBottom
+                                variant="p"
+                                component="div"
+                            >
+                                {item.title}
+                            </Typography>
+                            <Typography
+                                gutterBottom
+                                variant="p"
+                                component="div"
+                            >
+                                {item.price}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                ))}
+            </Box>
         </div>
     );
 };
