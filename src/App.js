@@ -21,7 +21,7 @@ export default function App() {
 
   return (
     <div>
-      <Navbar setProducts={setProducts}/>
+      <Navbar products={products} setProducts={setProducts}/>
       {/* <Appbar /> */}
       <ProductCards products={products} />
     </div>
