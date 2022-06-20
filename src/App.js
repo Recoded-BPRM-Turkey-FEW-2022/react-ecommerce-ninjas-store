@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import { useState, useEffect } from "react";
+import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Product from "./components/Product";
 import ProductCards from "./components/ProductCards";
@@ -18,6 +19,7 @@ export default function App() {
   return (
     <Router>
       <div>
+      <Navbar products={products} setProducts={setProducts}/>
         <Routes>
           <Route
             exact

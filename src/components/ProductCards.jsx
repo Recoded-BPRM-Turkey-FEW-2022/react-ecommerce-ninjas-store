@@ -49,26 +49,22 @@ const ProductCards = ({ products }) => {
                             </CardActionArea>
                         </NavLink>
 
-                        <CardContent>
-                            <Typography
-                                gutterBottom
-                                variant="p"
-                                component="div"
-                            >
-                                {item.title}
-                            </Typography>
-                            <Typography
-                                gutterBottom
-                                variant="p"
-                                component="div"
-                            >
-                                {item.price}
-                            </Typography>
-                        </CardContent>
-                    </Card>
-                ))}
-            </Box>
-        </div>
-    );
+            <CardContent>
+              <Typography gutterBottom variant="p" component="div">
+                {item.title}
+              </Typography>
+              <Typography gutterBottom variant="p" component="div">
+                Price: {item.price}$
+              </Typography>
+              <Typography gutterBottom variant="p" component="div">
+                rating: {item.rating.rate}
+              </Typography>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+    </div>
+  );
 };
+
 export default ProductCards;
