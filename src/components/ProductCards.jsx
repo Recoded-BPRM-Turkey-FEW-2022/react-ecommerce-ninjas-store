@@ -50,7 +50,10 @@ const ProductCards = ({ products }) => {
                 {item.title}
               </Typography>
               <Typography gutterBottom variant="p" component="div">
-                {item.price}
+                Price: {item.price}$
+              </Typography>
+              <Typography gutterBottom variant="p" component="div">
+                rating: {item.rating.rate}
               </Typography>
             </CardContent>
           </Card>
