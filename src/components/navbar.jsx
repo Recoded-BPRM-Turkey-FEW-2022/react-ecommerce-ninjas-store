@@ -16,15 +16,25 @@ export default function Navbar({products, setProducts}) {
         });
         setProducts(sorted);
     }
+
     function priceFilterDesc() {
         const sorted = [...products].sort((a, b) => {
             return b.price - a.price;
         });
         setProducts(sorted);
     }
+
+    function nameFitler() {
+        const sorted = [...products].sort(
+            (a, b) => a.title.localeCompare(b.title)
+        );
+        setProducts(sorted);
+    }
 // design will change. Those are just for testing now.
   return (
     <div>
+
+        <button onClick={() => {nameFitler()}} value="jewelery">Sort by Name ()</button>
         <button onClick={() => {priceFilterAsc()}} value="jewelery">Sort by price (asc)</button>
         <button onClick={() => {priceFilterDesc()}} value="jewelery">Sort by price (desc)</button>
         <button onClick={() => {categoriesFilter("jewelery")}} value="jewelery">jewelery</button>
