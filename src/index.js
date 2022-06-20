@@ -9,7 +9,6 @@ const root = createRoot(rootElement);
 
 root.render(
   <StrictMode>
-    {/* <Navbar /> */}
     <App />
   </StrictMode>
 );

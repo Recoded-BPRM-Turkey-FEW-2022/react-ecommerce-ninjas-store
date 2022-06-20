@@ -1,29 +1,34 @@
 import React from "react";
-import { useState, useEffect } from "react";
 import "./style.css";
-import ProductCards from "./components/ProductCards";
-import Appbar from "./components/Appbar";
+import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Product from "./components/Product";
+import ProductCards from "./components/ProductCards";
 
 export default function App() {
   const [products, setProducts] = useState([]);
-
   useEffect(() => {
-    fetchProducts();
-  }, []);
-  const fetchProducts = () => {
-    fetch("https://fakestoreapi.com/products")
+    fetch(`https://fakestoreapi.com/products`)
       .then((res) => res.json())
       .then((data) => {
-        setProducts(data);
+        return setProducts(data);
       });
-  };
+  }, []);
 
   return (
-    <div>
+    <Router>
+      <div>
       <Navbar products={products} setProducts={setProducts}/>
-      {/* <Appbar /> */}
-      <ProductCards products={products} />
-    </div>
+        <Routes>
+          <Route
+            exact
+            path="/"
+            element={<ProductCards products={products} />}
+          ></Route>
+          <Route exact path="/:id" element={<Product />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
