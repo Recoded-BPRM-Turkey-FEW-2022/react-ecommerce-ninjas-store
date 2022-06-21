@@ -4,24 +4,22 @@ import ImageGrid from '../components/productPage/ImageGrid'
 import MainImage from '../components/productPage/MainImage'
 import ProductDetails from '../components/productPage/ProductDetails'
 import ProductReview from '../components/productPage/ProductReview'
-import { Divider } from '@mui/material';
+import { Divider, Button } from '@mui/material';
 import { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   useParams,
 } from "react-router-dom";
 
-const Product = ({ products }) => {
+const Product = ({ onAdd }) => {
   const [productInfo, setProductInfo] = React.useState([]);
-  // const [selectedImage, setSelectedImage] = useState();
+  const [selectedImage, setSelectedImage] = useState();
 
   let { id } = useParams();
-  console.log(id)
   const fetchData = async () => {
     fetch(`https://fakestoreapi.com/products/${id}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         setProductInfo(data)
         setSelectedImage(productInfo.image)
       })
@@ -30,6 +28,7 @@ const Product = ({ products }) => {
   useEffect(() => {
     fetchData();
   }, []);
+
   return (
     <Grid container spacing={1} style={{ maxWidth: 1100, margin: '30 auto' }}>
       <Grid item sm={1} height='500'>
@@ -45,8 +44,9 @@ const Product = ({ products }) => {
           description={productInfo.description}
           price={productInfo.price}
           categoryy={productInfo.category}
+
         />
-      </Grid>
+        <Button variant='contained' color='primary' style={{ marginTop: "auto" }} onClick={() => onAdd(productInfo)}>Add to cart</Button>      </Grid>
       <Grid sm={3} height='500'></Grid>
       <Grid sm={4}>Review:</Grid>
       <Grid sm={8}><ProductReview review={productInfo} /></Grid>

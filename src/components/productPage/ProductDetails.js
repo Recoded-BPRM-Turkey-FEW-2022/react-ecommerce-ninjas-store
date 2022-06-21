@@ -2,7 +2,8 @@ import React from 'react';
 import Grid from '@mui/material/Grid';
 import { Typography, Divider, Box, Button } from '@mui/material';
 
-const productDetails = ({ title, description, price, category }) => {
+const productDetails = ({ title, description, price, category, onAdd }) => {
+
   return <Grid container direction='column' style={{ height: "100 %" }}>
     <Typography variant='subtitle1'>{category}</Typography>
     <Divider />
@@ -14,7 +15,7 @@ const productDetails = ({ title, description, price, category }) => {
       <Typography variant='h5'>price: {price}$</Typography>
     </Box>
     <Divider style={{ marginBottom: "2" }} />
-    <Button variant='contained' color='primary' style={{ marginTop: "auto" }}>Purchase </Button>
+
   </Grid>
 }
 
