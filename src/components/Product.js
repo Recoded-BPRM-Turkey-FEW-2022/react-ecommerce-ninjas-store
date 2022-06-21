@@ -46,7 +46,10 @@ const Product = ({ onAdd }) => {
           categoryy={productInfo.category}
 
         />
-        <Button variant='contained' color='primary' style={{ marginTop: "auto" }} onClick={() => onAdd(productInfo)}>Add to cart</Button>      </Grid>
+        <Button variant='contained' color='primary' style={{ marginTop: "auto" }} onClick={() => {
+
+          onAdd(productInfo)
+        }}>Add to cart</Button>      </Grid>
       <Grid sm={3} height='500'></Grid>
       <Grid sm={4}>Review:</Grid>
       <Grid sm={8}><ProductReview review={productInfo} /></Grid>

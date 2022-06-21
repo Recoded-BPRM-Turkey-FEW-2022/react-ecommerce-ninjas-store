@@ -17,12 +17,32 @@ export default function App() {
         fetch(`https://fakestoreapi.com/products`)
             .then((res) => res.json())
             .then((data) => {
-                return setProducts(data);
+                setProducts(data);
             });
     }, []);
+    // useEffect(() => {
+    //     if (!!cartItems) {
+    //         localStorage.setItem(
+    //             'cartitem',
+    //             JSON.stringify(cartItems)
+    //         );
+    //     }
+    // }, [cartItems]);
+
+    // useEffect(() => {
+    //     console.log(cartItems)
+    //     localStorage.setItem('items', JSON.stringify(cartItems));
+    // }, [cartItems])
+
+
+    // useEffect(() => {
+    //     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
+    //     if (cartItems) {
+    //         setItems(cartItems);
+    //     }
+    // }, []);
 
     const onAdd = (product) => {
-
         const exist = cartItems.find((x) => x.id === product.id);
         if (exist) {
             setCartItems(
@@ -32,10 +52,6 @@ export default function App() {
             );
         } else {
             setCartItems([...cartItems, { ...product, qty: 1 }]);
-
-            console.log(cartItems)
-
-
         }
     };
 
