@@ -5,10 +5,10 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Product from "./components/Product";
 import ProductCards from "./components/ProductCards";
-import Cart from './components/Cart'
-import Drawer from '@mui/material/Drawer';
-
-const data = JSON.parse(localStorage.getItem('cartItems')) || []
+import Cart from "./components/Cart";
+import Drawer from "@mui/material/Drawer";
+import ShoppingItem from "./components/ShoppingItem";
+const data = JSON.parse(localStorage.getItem("cartItems")) || [];
 export default function App() {
     const [products, setProducts] = useState([]);
     const [cartOpen, setCartOpen] = useState(true);
@@ -34,29 +34,43 @@ export default function App() {
         }
     };
     useEffect(() => {
-        console.log(cartItems)
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }, [cartItems])
+        console.log(cartItems);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
 
     return (
         <Router>
-            <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
-                <Cart
-                    cartItems={cartItems}
-                />
+            <Drawer
+                anchor="right"
+                open={cartOpen}
+                onClose={() => setCartOpen(false)}
+            >
+                <Cart cartItems={cartItems} />
             </Drawer>
             <div>
-                <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} />
+                <Navbar
+                    products={products}
+                    setProducts={setProducts}
+                    cartOpen={cartOpen}
+                />
                 <Routes>
                     <Route
                         exact
                         path="/"
                         element={<ProductCards products={products} />}
                     ></Route>
-                    <Route exact path="/:id" element={<Product onAdd={onAdd} />} />
-                    {/* <Route exact path="/Cart" element={<Cart items={items} />} /> */}
+                    <Route
+                        exact
+                        path="/:id"
+                        element={<Product onAdd={onAdd} />}
+                    />
+                    <Route
+                        exact
+                        path="/ShoppingItem"
+                        element={<ShoppingItem />}
+                    ></Route>
                 </Routes>
             </div>
-        </Router >
+        </Router>
     );
 }
