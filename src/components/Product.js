@@ -8,17 +8,18 @@ import { Divider } from "@mui/material";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, useParams } from "react-router-dom";
 
-const Product = ({ products }) => {
+const Product = ({ onAdd }) => {
+
     const [productInfo, setProductInfo] = React.useState([]);
     const [selectedImage, setSelectedImage] = useState();
 
     let { id } = useParams();
-    console.log(id);
+
     const fetchData = async () => {
         fetch(`https://fakestoreapi.com/products/${id}`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 setProductInfo(data);
                 setSelectedImage(productInfo.image);
             });
@@ -27,6 +28,8 @@ const Product = ({ products }) => {
     useEffect(() => {
         fetchData();
     }, []);
+
+
     return (
         <Grid
             container
@@ -47,6 +50,8 @@ const Product = ({ products }) => {
                     price={productInfo.price}
                     categoryy={productInfo.category}
                     image={productInfo.image}
+                    onAdd={onAdd}
+                    productInfo={productInfo}
                 />
             </Grid>
             <Grid sm={3} height="500"></Grid>

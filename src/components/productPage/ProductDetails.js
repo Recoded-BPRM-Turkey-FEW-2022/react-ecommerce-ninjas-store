@@ -3,7 +3,10 @@ import Grid from "@mui/material/Grid";
 import { Typography, Divider, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const productDetails = ({ title, description, price, category, image }) => (
+const productDetails = ({ title, description, price, category, image, onAdd, productInfo }) => {
+
+    return (
+
     <Grid container direction="column" style={{ height: "100 %" }}>
         <Typography variant="subtitle1">{category}</Typography>
         <Divider />
@@ -23,11 +26,12 @@ const productDetails = ({ title, description, price, category, image }) => (
                 variant="contained"
                 color="primary"
                 style={{ marginTop: "auto" }}
+                onClick={() => {onAdd(productInfo)}}
             >
                 Purchase{" "}
             </Button>
         </Link>
     </Grid>
-);
+);}
 
 export default productDetails;

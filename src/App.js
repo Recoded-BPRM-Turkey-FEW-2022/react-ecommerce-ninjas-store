@@ -9,8 +9,11 @@ import ProductCards from "./components/ProductCards";
 import Cart from "./components/Cart";
 import Drawer from "@mui/material/Drawer";
 import ShoppingItem from "./components/ShoppingItem";
+
 const data = JSON.parse(localStorage.getItem("cartItems")) || [];
+
 export default function App() {
+
     const [products, setProducts] = useState([]);
     const [cartOpen, setCartOpen] = useState(true);
     const [cartItems, setCartItems] = useState(data);
@@ -38,7 +41,7 @@ export default function App() {
     };
 
     useEffect(() => {
-        console.log(cartItems);
+        // console.log("cart items: ", cartItems);
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
     }, [cartItems]);
 
@@ -68,7 +71,7 @@ export default function App() {
                     <Route
                         exact
                         path="/ShoppingItem"
-                        element={<ShoppingItem />}
+                        element={<ShoppingItem cartItems={cartItems}/>}
                     ></Route>
                 </Routes>
             </div>
