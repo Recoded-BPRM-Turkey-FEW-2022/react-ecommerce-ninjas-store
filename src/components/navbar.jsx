@@ -92,7 +92,9 @@ export default function ButtonAppBar({
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor: "pointer"}} onClick={() => {
+            navigate("/Products")
+          }} style={{}}>
             Store
           </Typography>
 
@@ -209,8 +211,8 @@ export default function ButtonAppBar({
             </Select>
           </FormControl>
 
-
           <Button color="inherit" onClick={() => navigate("/Cart")}>Cart</Button>
+
         </Toolbar>
       </AppBar>
     </Box>

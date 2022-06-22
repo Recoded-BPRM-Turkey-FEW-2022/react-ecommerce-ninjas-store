@@ -23,6 +23,7 @@ export default function App() {
                 setProducts(data);
             });
     }, []);
+
     const onAdd = (product) => {
         const exist = cartItems.find((x) => x.id === product.id);
         if (exist) {
@@ -35,6 +36,7 @@ export default function App() {
             setCartItems([...cartItems, { ...product, qty: 1 }]);
         }
     };
+
     useEffect(() => {
         console.log(cartItems);
         localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -55,7 +57,7 @@ export default function App() {
                 <Routes>
                     <Route
                         exact
-                        path="/"
+                        path="/Products"
                         element={<ProductCards products={products} currentCategorie={currentCategorie}/>}
                     ></Route>
                     <Route

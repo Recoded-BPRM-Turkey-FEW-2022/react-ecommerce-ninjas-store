@@ -12,7 +12,7 @@ const Cart = ({ cartItems }) => {
 
       {cartItems.length === 0 ? <p>No items in cart.</p> : null}
       {cartItems.map((item) => (
-        <h2>{item.title}</h2>
+        <h2 key={item.id}>{item.title}</h2>
       ))
       }
     </Grid></>

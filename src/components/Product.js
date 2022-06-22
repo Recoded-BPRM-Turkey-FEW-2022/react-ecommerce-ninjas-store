@@ -10,7 +10,7 @@ import { BrowserRouter as Router, useParams } from "react-router-dom";
 
 const Product = ({ products }) => {
     const [productInfo, setProductInfo] = React.useState([]);
-    // const [selectedImage, setSelectedImage] = useState();
+    const [selectedImage, setSelectedImage] = useState();
 
     let { id } = useParams();
     console.log(id);

@@ -9,6 +9,7 @@ import Grid from "@mui/material/Grid";
 import { NavLink, useRouteMatch } from "react-router-dom";
 
 const ProductCards = ({ products, currentCategorie }) => {
+    
     return (
         <div style={{ width: "100%" }}>
             <h1>{currentCategorie}</h1>
@@ -23,7 +24,7 @@ const ProductCards = ({ products, currentCategorie }) => {
                     gap: "10px",
                 }}
             >
-                {products.map((item, index) => (
+                {products.map((item) => (
                     <Card
                         sx={{
                             width: 200,
@@ -34,7 +35,7 @@ const ProductCards = ({ products, currentCategorie }) => {
                             paddingBottom: 2,
                             background: "beige",
                         }}
-                        key={index}
+                        key={item.id}
                     >
                         <NavLink to={`/${item.id}`}>
                             <CardActionArea>
