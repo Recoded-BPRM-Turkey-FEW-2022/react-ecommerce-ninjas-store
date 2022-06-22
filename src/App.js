@@ -5,30 +5,35 @@ import Navbar from "./components/Navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Product from "./components/Product";
 import ProductCards from "./components/ProductCards";
-
+import ShoppingItem from "./components/ShoppingItem";
 export default function App() {
-  const [products, setProducts] = useState([]);
-  useEffect(() => {
-    fetch(`https://fakestoreapi.com/products`)
-      .then((res) => res.json())
-      .then((data) => {
-        return setProducts(data);
-      });
-  }, []);
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        fetch(`https://fakestoreapi.com/products`)
+            .then((res) => res.json())
+            .then((data) => {
+                return setProducts(data);
+            });
+    }, []);
 
-  return (
-    <Router>
-      <div>
-      <Navbar products={products} setProducts={setProducts}/>
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={<ProductCards products={products} />}
-          ></Route>
-          <Route exact path="/:id" element={<Product />} />
-        </Routes>
-      </div>
-    </Router>
-  );
+    return (
+        <Router>
+            <div>
+                <Navbar products={products} setProducts={setProducts} />
+                <Routes>
+                    <Route
+                        exact
+                        path="/"
+                        element={<ProductCards products={products} />}
+                    ></Route>
+                    <Route exact path="/:id" element={<Product />} />
+                    <Route
+                        exact
+                        path="/ShoppingItem"
+                        element={<ShoppingItem />}
+                    ></Route>
+                </Routes>
+            </div>
+        </Router>
+    );
 }
