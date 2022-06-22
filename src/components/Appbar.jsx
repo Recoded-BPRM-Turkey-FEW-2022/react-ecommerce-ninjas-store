@@ -5,12 +5,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-// import MenuIcon from '@mui/icons-material/Menu';
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+
 
 export default function ButtonAppBar({
   products,
@@ -18,9 +18,15 @@ export default function ButtonAppBar({
   setCurrentCategorie,
 }) {
   const [categorie, setcategorie] = React.useState("");
+  const [filter, setfilter] = React.useState("");
 
-  const handleChange = (event) => {
+  const categorieHandleChange = (event) => {
     setcategorie(event.target.value);
+    setfilter(null);
+  };
+
+  const filterHandleChange = (event) => {
+    setfilter(event.target.value);
   };
 
   function categoriesFilter(categorie) {
@@ -95,10 +101,10 @@ export default function ButtonAppBar({
               id="demo-select-small"
               value={categorie}
               label="categorie"
-              onChange={handleChange}
+              onChange={categorieHandleChange}
             >
               <MenuItem
-                value={"All"}
+                value={0}
                 onClick={() => {
                   noCatogorie();
                   setCurrentCategorie("Latest Products");
@@ -107,7 +113,7 @@ export default function ButtonAppBar({
                 <em>All</em>
               </MenuItem>
               <MenuItem
-                value={"jewelery"}
+                value={1}
                 onClick={() => {
                   categoriesFilter("jewelery");
                   setCurrentCategorie("Jewelery");
@@ -116,7 +122,7 @@ export default function ButtonAppBar({
                 Jewelery
               </MenuItem>
               <MenuItem
-                value={"electronics"}
+                value={2}
                 onClick={() => {
                   categoriesFilter("electronics");
                   setCurrentCategorie("Electronics");
@@ -125,7 +131,7 @@ export default function ButtonAppBar({
                 Electronics
               </MenuItem>
               <MenuItem
-                value={"men's clothing"}
+                value={3}
                 onClick={() => {
                   categoriesFilter("men's clothing");
                   setCurrentCategorie("Men's clothing");
@@ -134,7 +140,7 @@ export default function ButtonAppBar({
                 Men's clothing
               </MenuItem>
               <MenuItem
-                value={"women's clothing"}
+                value={4}
                 onClick={() => {
                   categoriesFilter("women's clothing");
                   setCurrentCategorie("Women's clothing");
@@ -146,18 +152,18 @@ export default function ButtonAppBar({
           </FormControl>
 
           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="demo-select-small" style={{ color: "white" }}>
+            <InputLabel id="filter-select-small" style={{ color: "white" }}>
               Filter by
             </InputLabel>
             <Select
-              labelId="demo-select-small"
-              id="demo-select-small"
-              value={categorie}
-              label="categorie"
-              onChange={handleChange}
+              labelId="filter-select-small"
+              id="filter-select-small"
+              value={filter}
+              label="filter"
+              onChange={filterHandleChange}
             >
               <MenuItem
-                value={"name"}
+                value={0}
                 onClick={() => {
                   nameFitler();
                 }}
@@ -165,7 +171,7 @@ export default function ButtonAppBar({
                 Name
               </MenuItem>
               <MenuItem
-                value={"Ascending Price"}
+                value={1}
                 onClick={() => {
                   priceFilterAsc();
                 }}
@@ -173,7 +179,7 @@ export default function ButtonAppBar({
                 Ascending Price
               </MenuItem>
               <MenuItem
-                value={"Descending Price"}
+                value={2}
                 onClick={() => {
                   priceFilterDesc();
                 }}
@@ -181,7 +187,7 @@ export default function ButtonAppBar({
                 Descending Price
               </MenuItem>
               <MenuItem
-                value={"Ascending Rating"}
+                value={3}
                 onClick={() => {
                   ratingFilterAsc();
                 }}
@@ -189,7 +195,7 @@ export default function ButtonAppBar({
                 Ascending Rating
               </MenuItem>
               <MenuItem
-                value={"Descending Rating"}
+                value={4}
                 onClick={() => {
                   ratingFilterDesc();
                 }}
@@ -198,6 +204,7 @@ export default function ButtonAppBar({
               </MenuItem>
             </Select>
           </FormControl>
+
 
           <Button color="inherit">Cart</Button>
         </Toolbar>
