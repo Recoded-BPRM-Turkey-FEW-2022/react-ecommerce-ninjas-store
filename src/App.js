@@ -20,27 +20,6 @@ export default function App() {
                 setProducts(data);
             });
     }, []);
-    // useEffect(() => {
-    //     if (!!cartItems) {
-    //         localStorage.setItem(
-    //             'cartitem',
-    //             JSON.stringify(cartItems)
-    //         );
-    //     }
-    // }, [cartItems]);
-
-    // useEffect(() => {
-    //     console.log(cartItems)
-    //     localStorage.setItem('items', JSON.stringify(cartItems));
-    // }, [cartItems])
-
-
-    // useEffect(() => {
-    //     const cartItems = JSON.parse(localStorage.getItem('cartItems'));
-    //     if (cartItems) {
-    //         setItems(cartItems);
-    //     }
-    // }, []);
 
     const onAdd = (product) => {
         const exist = cartItems.find((x) => x.id === product.id);
@@ -51,10 +30,16 @@ export default function App() {
                 )
             );
         } else {
+            // localStorage.setItem('items', JSON.stringify(cartItems));
             setCartItems([...cartItems, { ...product, qty: 1 }]);
         }
+        localStorage.setItem('items', JSON.stringify(cartItems));
     };
-
+    useEffect(() => {
+        console.log(cartItems)
+    }, [cartItems])
+    let items = localStorage.getItem("items");
+    console.log(items)
     return (
         <Router>
             {/* <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
