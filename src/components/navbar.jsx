@@ -50,7 +50,6 @@ export default function Navbar({ products, setProducts, cartOpen, cartItems, han
     // design will change. Those are just for testing now.
     return (
         <div>
-            Will change the style with Material UI <br></br>
             <button onClick={() => { nameFitler() }} value="jewelery">Sort by Name ()</button>
             <button onClick={() => { priceFilterAsc() }} value="jewelery">Sort by price (asc)</button>
             <button onClick={() => { priceFilterDesc() }} value="jewelery">Sort by price (desc)</button>

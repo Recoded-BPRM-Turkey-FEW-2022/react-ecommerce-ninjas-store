@@ -2,6 +2,8 @@ import React from "react";
 import "./style.css";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
+import Appbar from "./components/Appbar";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Product from "./components/Product";
 import ProductCards from "./components/ProductCards";
@@ -46,7 +48,8 @@ export default function App() {
                 />
             </Drawer>
             <div>
-                <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} />
+                <Appbar products={products} setProducts={setProducts} cartOpen={cartOpen} />
+                {/* <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} /> */}
                 <Routes>
                     <Route
                         exact
