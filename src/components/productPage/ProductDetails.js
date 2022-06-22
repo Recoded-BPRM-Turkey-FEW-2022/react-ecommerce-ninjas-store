@@ -3,7 +3,7 @@ import Grid from "@mui/material/Grid";
 import { Typography, Divider, Box, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const productDetails = ({ title, description, price, category }) => (
+const productDetails = ({ title, description, price, category, image }) => (
     <Grid container direction="column" style={{ height: "100 %" }}>
         <Typography variant="subtitle1">{category}</Typography>
         <Divider />
