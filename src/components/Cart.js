@@ -5,21 +5,17 @@ import CartItem from './Cart/CartItem';
 
 
 const Cart = ({ cartItems }) => {
-  console.log(cartItems)
+  console.log(cartItems.length)
   return (
-    <div>cart</div>
-    // <Grid container direction='column' style={{ width: 500, padding: 20 }}>
-    //   <h2>Your Cart</h2>
-    //   {/* {cartItems.length === 0 ? <p>No items in cart.</p> : null} */}
-    //   {cartItems.map((item) => (
-    //     <CartItem
-    //       key={item.id}
-    //       item={item}
-    //       addToCart={addToCart}
-    //       removeFromCart={removeFromCart}
-    //     />
-    //   ))}
-    // </Grid>
+    <><Grid container direction='column' style={{ width: 500, padding: 20 }}>
+      <h2>Your Cart sd</h2>
+
+      {cartItems.length === 0 ? <p>No items in cart.</p> : null}
+      {cartItems.map((item) => (
+        <h2>{item.title}</h2>
+      ))
+      }
+    </Grid></>
 
   )
 }

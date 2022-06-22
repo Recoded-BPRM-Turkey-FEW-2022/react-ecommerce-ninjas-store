@@ -2,7 +2,8 @@ import { Box } from "@mui/system";
 import Grid from '@mui/material/Grid';
 
 
-const CartItem = ({ key, item, addToCart, removeFromCart }) => {
+const CartItem = ({ key, item }) => {
+  console.log(item)
   return (<Grid container direction={column}>
     <Box>
       <h3>{item.title}</h3>

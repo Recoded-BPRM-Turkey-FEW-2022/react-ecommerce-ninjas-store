@@ -8,10 +8,11 @@ import ProductCards from "./components/ProductCards";
 import Cart from './components/Cart'
 import Drawer from '@mui/material/Drawer';
 
+const data = JSON.parse(localStorage.getItem('cartItems')) || []
 export default function App() {
     const [products, setProducts] = useState([]);
     const [cartOpen, setCartOpen] = useState(true);
-    const [cartItems, setCartItems] = useState([]);
+    const [cartItems, setCartItems] = useState(data);
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products`)
@@ -20,7 +21,6 @@ export default function App() {
                 setProducts(data);
             });
     }, []);
-
     const onAdd = (product) => {
         const exist = cartItems.find((x) => x.id === product.id);
         if (exist) {
@@ -30,23 +30,21 @@ export default function App() {
                 )
             );
         } else {
-            // localStorage.setItem('items', JSON.stringify(cartItems));
             setCartItems([...cartItems, { ...product, qty: 1 }]);
         }
-        localStorage.setItem('items', JSON.stringify(cartItems));
     };
     useEffect(() => {
         console.log(cartItems)
+        localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems])
-    let items = localStorage.getItem("items");
-    console.log(items)
+
     return (
         <Router>
-            {/* <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+            <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     cartItems={cartItems}
                 />
-            </Drawer> */}
+            </Drawer>
             <div>
                 <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} />
                 <Routes>
@@ -56,7 +54,7 @@ export default function App() {
                         element={<ProductCards products={products} />}
                     ></Route>
                     <Route exact path="/:id" element={<Product onAdd={onAdd} />} />
-                    <Route exact path="/Cart" element={<Cart cartItems={cartItems} />} />
+                    {/* <Route exact path="/Cart" element={<Cart items={items} />} /> */}
                 </Routes>
             </div>
         </Router >
