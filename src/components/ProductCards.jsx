@@ -9,7 +9,6 @@ import Grid from "@mui/material/Grid";
 import { NavLink, useRouteMatch } from "react-router-dom";
 
 const ProductCards = ({ products }) => {
-    console.log(products)
     return (
         <div style={{ width: "100%" }}>
             <h1>LATEST PRODUCTS</h1>
@@ -49,22 +48,22 @@ const ProductCards = ({ products }) => {
                             </CardActionArea>
                         </NavLink>
 
-            <CardContent>
-              <Typography gutterBottom variant="p" component="div">
-                {item.title}
-              </Typography>
-              <Typography gutterBottom variant="p" component="div">
-                Price: {item.price}$
-              </Typography>
-              <Typography gutterBottom variant="p" component="div">
-                rating: {item.rating.rate}
-              </Typography>
-            </CardContent>
-          </Card>
-        ))}
-      </Box>
-    </div>
-  );
+                        <CardContent>
+                            <Typography gutterBottom variant="p" component="div">
+                                {item.title}
+                            </Typography>
+                            <Typography gutterBottom variant="p" component="div">
+                                Price: {item.price}$
+                            </Typography>
+                            <Typography gutterBottom variant="p" component="div">
+                                rating: {item.rating.rate}
+                            </Typography>
+                        </CardContent>
+                    </Card>
+                ))}
+            </Box>
+        </div>
+    );
 };
 
 export default ProductCards;
