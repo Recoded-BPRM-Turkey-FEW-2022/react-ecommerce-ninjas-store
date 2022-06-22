@@ -11,6 +11,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+import { useNavigate, Link } from "react-router-dom";
+
 
 export default function ButtonAppBar({
   products,
@@ -19,6 +21,8 @@ export default function ButtonAppBar({
 }) {
   const [categorie, setcategorie] = React.useState("");
   const [filter, setfilter] = React.useState("");
+
+  const navigate = useNavigate();
 
   const categorieHandleChange = (event) => {
     setcategorie(event.target.value);
@@ -79,15 +83,15 @@ export default function ButtonAppBar({
     <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="menu"
             sx={{ mr: 2 }}
           >
-            {/* <MenuIcon /> */}
-          </IconButton>
+            <MenuIcon />
+          </IconButton> */}
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Store
           </Typography>
@@ -206,7 +210,7 @@ export default function ButtonAppBar({
           </FormControl>
 
 
-          <Button color="inherit">Cart</Button>
+          <Button color="inherit" onClick={() => navigate("/Cart")}>Cart</Button>
         </Toolbar>
       </AppBar>
     </Box>
