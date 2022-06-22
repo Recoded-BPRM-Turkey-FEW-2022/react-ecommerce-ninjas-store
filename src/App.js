@@ -2,6 +2,8 @@ import React from "react";
 import "./style.css";
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
+import Appbar from "./components/Appbar";
+
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Product from "./components/Product";
 import ProductCards from "./components/ProductCards";
@@ -13,6 +15,7 @@ export default function App() {
     const [products, setProducts] = useState([]);
     const [cartOpen, setCartOpen] = useState(true);
     const [cartItems, setCartItems] = useState(data);
+    const [currentCategorie, setCurrentCategorie] = useState("Latest Products");
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products`)
@@ -48,16 +51,13 @@ export default function App() {
                 <Cart cartItems={cartItems} />
             </Drawer>
             <div>
-                <Navbar
-                    products={products}
-                    setProducts={setProducts}
-                    cartOpen={cartOpen}
-                />
+                <Appbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie}/>
+                {/* <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} /> */}
                 <Routes>
                     <Route
                         exact
                         path="/"
-                        element={<ProductCards products={products} />}
+                        element={<ProductCards products={products} currentCategorie={currentCategorie}/>}
                     ></Route>
                     <Route
                         exact

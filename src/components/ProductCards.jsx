@@ -8,10 +8,10 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { NavLink, useRouteMatch } from "react-router-dom";
 
-const ProductCards = ({ products }) => {
+const ProductCards = ({ products, currentCategorie }) => {
     return (
         <div style={{ width: "100%" }}>
-            <h1>LATEST PRODUCTS</h1>
+            <h1>{currentCategorie}</h1>
 
             <Box
                 sx={{
