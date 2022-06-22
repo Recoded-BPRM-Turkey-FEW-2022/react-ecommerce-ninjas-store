@@ -15,10 +15,7 @@ import Select from "@mui/material/Select";
 export default function ButtonAppBar({
   products,
   setProducts,
-  cartOpen,
-  cartItems,
-  handleAddToCart,
-  handleRemoveFromCart,
+  setCurrentCategorie,
 }) {
   const [categorie, setcategorie] = React.useState("");
 
@@ -73,7 +70,7 @@ export default function ButtonAppBar({
   }
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1}}>
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -101,36 +98,46 @@ export default function ButtonAppBar({
               onChange={handleChange}
             >
               <MenuItem
+                value={"All"}
                 onClick={() => {
                   noCatogorie();
+                  setCurrentCategorie("Latest Products");
                 }}
               >
                 <em>All</em>
               </MenuItem>
               <MenuItem
+                value={"jewelery"}
                 onClick={() => {
                   categoriesFilter("jewelery");
+                  setCurrentCategorie("Jewelery");
                 }}
               >
                 Jewelery
               </MenuItem>
               <MenuItem
+                value={"electronics"}
                 onClick={() => {
                   categoriesFilter("electronics");
+                  setCurrentCategorie("Electronics");
                 }}
               >
                 Electronics
               </MenuItem>
               <MenuItem
+                value={"men's clothing"}
                 onClick={() => {
                   categoriesFilter("men's clothing");
+                  setCurrentCategorie("Men's clothing");
                 }}
               >
                 Men's clothing
               </MenuItem>
               <MenuItem
+                value={"women's clothing"}
                 onClick={() => {
                   categoriesFilter("women's clothing");
+                  setCurrentCategorie("Women's clothing");
                 }}
               >
                 Women's clothing
@@ -150,6 +157,7 @@ export default function ButtonAppBar({
               onChange={handleChange}
             >
               <MenuItem
+                value={"name"}
                 onClick={() => {
                   nameFitler();
                 }}
@@ -157,6 +165,7 @@ export default function ButtonAppBar({
                 Name
               </MenuItem>
               <MenuItem
+                value={"Ascending Price"}
                 onClick={() => {
                   priceFilterAsc();
                 }}
@@ -164,6 +173,7 @@ export default function ButtonAppBar({
                 Ascending Price
               </MenuItem>
               <MenuItem
+                value={"Descending Price"}
                 onClick={() => {
                   priceFilterDesc();
                 }}
@@ -171,6 +181,7 @@ export default function ButtonAppBar({
                 Descending Price
               </MenuItem>
               <MenuItem
+                value={"Ascending Rating"}
                 onClick={() => {
                   ratingFilterAsc();
                 }}
@@ -178,6 +189,7 @@ export default function ButtonAppBar({
                 Ascending Rating
               </MenuItem>
               <MenuItem
+                value={"Descending Rating"}
                 onClick={() => {
                   ratingFilterDesc();
                 }}
@@ -188,7 +200,6 @@ export default function ButtonAppBar({
           </FormControl>
 
           <Button color="inherit">Cart</Button>
-
         </Toolbar>
       </AppBar>
     </Box>

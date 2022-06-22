@@ -15,6 +15,7 @@ export default function App() {
     const [products, setProducts] = useState([]);
     const [cartOpen, setCartOpen] = useState(true);
     const [cartItems, setCartItems] = useState(data);
+    const [currentCategorie, setCurrentCategorie] = useState("Latest Products");
 
     useEffect(() => {
         fetch(`https://fakestoreapi.com/products`)
@@ -48,13 +49,13 @@ export default function App() {
                 />
             </Drawer>
             <div>
-                <Appbar products={products} setProducts={setProducts} cartOpen={cartOpen} />
+                <Appbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie}/>
                 {/* <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} /> */}
                 <Routes>
                     <Route
                         exact
                         path="/"
-                        element={<ProductCards products={products} />}
+                        element={<ProductCards products={products} currentCategorie={currentCategorie}/>}
                     ></Route>
                     <Route exact path="/:id" element={<Product onAdd={onAdd} />} />
                     {/* <Route exact path="/Cart" element={<Cart items={items} />} /> */}
