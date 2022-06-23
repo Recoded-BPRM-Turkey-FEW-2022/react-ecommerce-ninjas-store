@@ -61,7 +61,17 @@ const Cart = ({ cartItems }) => {
                       Price: ${item.price}
                     </Typography>
                   </Grid>
-                  <Grid item xs={8} sx={{ paddingLeft: 24 }}>
+                  <Button variant="text" onClick={() => {
+                      for (let i = 0; i <= cartItems.length; i++) {
+                        if (item.id === cartItems[i].id) {
+                          cartItems.splice(i, 1);
+                          console.log("item deleted");
+                          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                          break;
+                        }
+                      }
+                      }}>Remove</Button>
+                  {/* <Grid item xs={8} sx={{ paddingLeft: 24 }}>
 
                     <Button variant="text" onClick={() => {
 
@@ -74,7 +84,7 @@ const Cart = ({ cartItems }) => {
                         }
                       }
                     }}>Remove</Button>
-                  </Grid>
+                  </Grid> */}
                 </Grid>
                 {/* <Grid item>
                     {/* <Typography sx={{ cursor: 'pointer' }} variant="body2">
@@ -83,9 +93,9 @@ const Cart = ({ cartItems }) => {
               </Grid>
             </Grid>
             <Grid item>
-              <Typography variant="subtitle1">
+              {/* <Typography variant="subtitle1">
                 fsdf
-              </Typography>
+              </Typography> */}
             </Grid>
           </Paper>
         ))

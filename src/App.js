@@ -56,7 +56,7 @@ export default function App() {
 
     return (
         <Router>
-            <ButtonBase style={{ float: 'right', margin: 10 }} onClick={() => setCartOpen(true)}>
+            {/* <ButtonBase style={{ float: 'right', margin: 10 }} onClick={() => setCartOpen(true)}>
                 <Badge badgeContent={getTotalItems()} color="error">
                     <AddShoppingCartIcon />
                 </Badge>
@@ -65,9 +65,9 @@ export default function App() {
                 <Cart
                     cartItems={cartItems}
                 />
-            </Drawer>
+            </Drawer> */}
             <div>
-                <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} />
+                <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} getTotalItems={getTotalItems} cartOpen={cartOpen} setCartOpen={setCartOpen} cartItems={cartItems} />
                 <Routes>
                     <Route
                         exact
