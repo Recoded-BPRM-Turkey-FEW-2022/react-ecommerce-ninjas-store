@@ -7,6 +7,7 @@ import Product from "./components/Product";
 import ProductCards from "./components/ProductCards";
 import Cart from './components/Cart'
 import Drawer from '@mui/material/Drawer';
+import { Badge } from "@mui/material";
 
 const data = JSON.parse(localStorage.getItem('cartItems')) || []
 export default function App() {
@@ -40,6 +41,9 @@ export default function App() {
 
     return (
         <Router>
+            <Badge badgeContent={getTotalItems(cartItems)} color="error">
+
+            </Badge>
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     cartItems={cartItems}
