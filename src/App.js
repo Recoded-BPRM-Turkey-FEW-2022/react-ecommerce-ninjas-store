@@ -8,6 +8,7 @@ import ProductCards from "./components/ProductCards";
 import Cart from './components/Cart'
 import Drawer from '@mui/material/Drawer';
 import { Badge } from "@mui/material";
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const data = JSON.parse(localStorage.getItem('cartItems')) || []
 export default function App() {
@@ -41,8 +42,8 @@ export default function App() {
 
     return (
         <Router>
-            <Badge color="error">
-
+            <Badge>
+                <AddShoppingCartIcon />
             </Badge>
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
