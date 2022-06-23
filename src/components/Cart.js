@@ -18,48 +18,61 @@ const Cart = ({ cartItems }) => {
   }
   calculateTotal()
   return (
-    <><Grid container style={{ width: 500, padding: 20 }}>
-      <h2>Your Cart </h2>
-      {cartItems.length === 0 ? <p>No items in cart.</p> : null}
-      {cartItems.map((item, index) => (
-        <Paper
-          sx={{
-            p: 2,
-            margin: 'auto',
-            maxWidth: 500,
-            flexGrow: 1,
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-          }}
-          key={index}
-        >
-          <Grid container spacing={2}>
-            <Grid item>
-              <ButtonBase sx={{ width: 128, height: 128 }}>
-                <img src={item.image} style={{ width: 150, height: 150 }} />
-              </ButtonBase>
-            </Grid>
-            <Grid item xs={12} sm container>
-              <Grid item xs container direction="column" spacing={2}>
-                <Grid item xs>
-                  <h3>{item.title}</h3>
-                  <Typography variant="subtitle" >
-                    Price: ${item.price}
-                  </Typography>
+    <>
+      <Grid container style={{ width: 500, padding: 20 }}>
+        <h2>Your Cart </h2>
+        <Grid container sx={{
+          margin: 'auto',
+          maxWidth: 500,
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        }}>
+          <Typography variant='subtitle1'>
+            {cartItems.length === 0 ? <p>No items in cart.</p> : null}
+          </Typography>
+
+        </Grid>
+
+        {cartItems.map((item, index) => (
+          <Paper
+            sx={{
+              p: 2,
+              margin: '8 auto',
+              maxWidth: 500,
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+            key={index}
+          >
+            <Grid container spacing={2}>
+              <Grid item>
+                <ButtonBase sx={{ width: 128, height: 128 }}>
+                  <img src={item.image} style={{ width: 150, height: 150 }} />
+                </ButtonBase>
+              </Grid>
+              <Grid item xs={12} sm container>
+                <Grid item xs container direction="column" spacing={2}>
+                  <Grid item xs>
+                    <h3>{item.title}</h3>
+                    <Typography variant="subtitle" >
+                      Price: ${item.price}
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography sx={{ cursor: 'pointer' }} variant="body2">
+                      Remove
+                    </Typography>
+                  </Grid>
                 </Grid>
                 <Grid item>
-                  <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                    Remove
+                  <Typography variant="subtitle1">
+                    fsdf
                   </Typography>
                 </Grid>
               </Grid>
-              <Grid item>
-                <Typography variant="subtitle1">
-                  fsdf
-                </Typography>
-              </Grid>
-            </Grid>
-            {/* <CardContent>
+              {/* <CardContent>
               <Typography gutterBottom variant="p" component="div">
                 {item.title}
               </Typography>
@@ -67,10 +80,10 @@ const Cart = ({ cartItems }) => {
                 Price: {item.price}$
               </Typography>
             </CardContent> */}
-          </Grid>
-        </Paper>
-      ))}
-    </Grid>
+            </Grid>
+          </Paper>
+        ))}
+      </Grid>
       <Grid container sx={{
         p: 2,
         margin: 'auto',
@@ -91,8 +104,8 @@ const Cart = ({ cartItems }) => {
         backgroundColor: (theme) =>
           theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
       }}> */}
-      <Button variant="contained" href="#contained-buttons" color="success">
-        Continue to Payment
+      <Button variant="contained" href="#contained-buttons" color="success" sx={{ borderRadius: '0' }}>
+        Proceed to Payment
       </Button>
       {/* </Grid> */}
     </>

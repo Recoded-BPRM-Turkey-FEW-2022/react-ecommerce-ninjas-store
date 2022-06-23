@@ -40,10 +40,16 @@ export default function App() {
         localStorage.setItem('cartItems', JSON.stringify(cartItems));
     }, [cartItems])
 
+    const getTotalItems = () => {
+        let badgeContent = cartItems.reduce((acc, item) => acc + item.qty, 0);
+        console.log(badgeContent)
+        return badgeContent;
+    }
+
     return (
         <Router>
-            <ButtonBase style={{ float: 'right' }} onClick={() => setCartOpen(true)}>
-                <Badge color="error">
+            <ButtonBase style={{ float: 'right', margin: 10 }} onClick={() => setCartOpen(true)}>
+                <Badge badgeContent={getTotalItems()} color="error">
                     <AddShoppingCartIcon />
                 </Badge>
             </ButtonBase>
