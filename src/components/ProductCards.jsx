@@ -7,11 +7,13 @@ import { CardActionArea } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { NavLink, useRouteMatch } from "react-router-dom";
+import Rating from "@mui/material/Rating";
 
-const ProductCards = ({ products }) => {
+const ProductCards = ({ products, currentCategorie }) => {
+    const [value, setValue] = React.useState(2);
     return (
         <div style={{ width: "100%" }}>
-            <h1>LATEST PRODUCTS</h1>
+            <h1>{currentCategorie}</h1>
 
             <Box
                 sx={{
@@ -23,43 +25,62 @@ const ProductCards = ({ products }) => {
                     gap: "10px",
                 }}
             >
-                {products.map((item, index) => (
-                    <Card
-                        sx={{
-                            width: 200,
-                            height: 300,
-                            paddingLeft: 2,
-                            paddingRight: 2,
-                            paddingTop: 2,
-                            paddingBottom: 2,
-                            background: "beige",
-                        }}
-                        key={index}
-                    >
-                        <NavLink to={`/${item.id}`}>
-                            <CardActionArea>
+                {products.map((item) => (
+                    <NavLink to={`/${item.id}`}>
+                        <CardActionArea>
+                            <Card
+                                sx={{
+                                    width: 200,
+                                    height: 410,
+                                    paddingLeft: 2,
+                                    paddingRight: 2,
+                                    paddingTop: 2,
+                                    paddingBottom: 2,
+                                    border: "outlined",
+                                }}
+                                key={item.id}
+                            >
                                 <CardMedia
                                     component="img"
-                                    height="130"
+                                    height="250"
                                     width="50"
                                     image={item.image}
                                     id={item.id}
                                 />
-                            </CardActionArea>
-                        </NavLink>
 
-                        <CardContent>
-                            <Typography gutterBottom variant="p" component="div">
-                                {item.title}
-                            </Typography>
-                            <Typography gutterBottom variant="p" component="div">
-                                Price: {item.price}$
-                            </Typography>
-                            <Typography gutterBottom variant="p" component="div">
-                                rating: {item.rating.rate}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                                <CardContent
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "flex-start",
+                                        gap: "3px",
+                                    }}
+                                >
+                                    <Typography
+                                        component="div"
+                                        fontSize={"12px"}
+                                        fontWeight={"bold"}
+                                    >
+                                        {item.title}
+                                    </Typography>
+                                    <Typography
+                                        component="div"
+                                        fontSize={"13px"}
+                                        fontWeight={"bold"}
+                                    >
+                                        Price: {item.price}$
+                                    </Typography>
+
+                                    <Typography component="legend"></Typography>
+                                    <Rating
+                                        name="read-only"
+                                        value={item.rating.rate}
+                                        readOnly
+                                    />
+                                </CardContent>
+                            </Card>
+                        </CardActionArea>
+                    </NavLink>
                 ))}
             </Box>
         </div>

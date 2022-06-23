@@ -9,12 +9,17 @@ import Cart from './components/Cart'
 import Drawer from '@mui/material/Drawer';
 import { Badge, ButtonBase } from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import ShoppingItem from "./components/ShoppingItem";
 
-const data = JSON.parse(localStorage.getItem('cartItems')) || []
+
+const data = JSON.parse(localStorage.getItem("cartItems")) || [];
+
 export default function App() {
+
     const [products, setProducts] = useState([]);
     const [cartOpen, setCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState(data);
+    const [currentCategorie, setCurrentCategorie] = useState("Latest Products");
 
     useEffect(() => {
         fetch(`http://localhost:3000/products`)
@@ -24,6 +29,7 @@ export default function App() {
                 setProducts(data);
             });
     }, []);
+
     const onAdd = (product) => {
         const exist = cartItems.find((x) => x.id === product.id);
         if (exist) {
@@ -36,10 +42,11 @@ export default function App() {
             setCartItems([...cartItems, { ...product, qty: 1 }]);
         }
     };
+
     useEffect(() => {
-        console.log(cartItems)
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }, [cartItems])
+        // console.log("cart items: ", cartItems);
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }, [cartItems]);
 
     const getTotalItems = () => {
         let badgeContent = cartItems.reduce((acc, item) => acc + item.qty, 0);
@@ -60,17 +67,25 @@ export default function App() {
                 />
             </Drawer>
             <div>
-                {/* <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} /> */}
+                <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} />
                 <Routes>
                     <Route
                         exact
-                        path="/"
-                        element={<ProductCards products={products} />}
+                        path="/Products"
+                        element={<ProductCards products={products} currentCategorie={currentCategorie} />}
                     ></Route>
-                    <Route exact path="/:id" element={<Product onAdd={onAdd} />} />
-                    {/* <Route exact path="/Cart" element={<Cart items={items} />} /> */}
+                    <Route
+                        exact
+                        path="/:id"
+                        element={<Product onAdd={onAdd} />}
+                    />
+                    <Route
+                        exact
+                        path="/ShoppingItem"
+                        element={<ShoppingItem cartItems={cartItems} />}
+                    ></Route>
                 </Routes>
             </div>
-        </Router >
+        </Router>
     );
 }

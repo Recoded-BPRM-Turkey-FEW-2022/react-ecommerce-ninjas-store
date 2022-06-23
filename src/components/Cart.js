@@ -8,6 +8,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import { NavLink, useRouteMatch } from "react-router-dom";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const Cart = ({ cartItems }) => {
   const calculateTotal = () => {
@@ -60,30 +61,36 @@ const Cart = ({ cartItems }) => {
                       Price: ${item.price}
                     </Typography>
                   </Grid>
-                  <Grid item>
-                    <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                      Remove
-                    </Typography>
+                  <Grid item xs={8} sx={{ paddingLeft: 24 }}>
+
+                    <Button variant="text" onClick={() => {
+
+                      for (let i = 0; i <= cartItems.length; i++) {
+                        if (item.id === cartItems[i].id) {
+                          cartItems.splice(i, 1);
+                          console.log("item deleted");
+                          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                          break;
+                        }
+                      }
+                    }}>Remove</Button>
                   </Grid>
                 </Grid>
-                <Grid item>
-                  <Typography variant="subtitle1">
-                    fsdf
-                  </Typography>
-                </Grid>
+                {/* <Grid item>
+                    {/* <Typography sx={{ cursor: 'pointer' }} variant="body2">
+                      Remove
+                    </Typography> */}
               </Grid>
-              {/* <CardContent>
-              <Typography gutterBottom variant="p" component="div">
-                {item.title}
+            </Grid>
+            <Grid item>
+              <Typography variant="subtitle1">
+                fsdf
               </Typography>
-              <Typography gutterBottom variant="p" component="div">
-                Price: {item.price}$
-              </Typography>
-            </CardContent> */}
             </Grid>
           </Paper>
-        ))}
-      </Grid>
+        ))
+        }
+      </Grid >
       <Grid container sx={{
         p: 2,
         margin: 'auto',
@@ -95,6 +102,9 @@ const Cart = ({ cartItems }) => {
         <Typography variant="h5" >
           Total: ${calculateTotal().toFixed(2)}
         </Typography>
+        {cartItems.length === 0 ? null : <Button variant="text" onClick={() => {
+          window.localStorage.clear();
+        }}>Remove All</Button>}
       </Grid>
       {/* <Grid container sx={{
         p: 2,
