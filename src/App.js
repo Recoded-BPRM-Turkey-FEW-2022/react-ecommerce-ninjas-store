@@ -17,9 +17,10 @@ export default function App() {
     const [cartItems, setCartItems] = useState(data);
 
     useEffect(() => {
-        fetch(`https://fakestoreapi.com/products`)
+        fetch(`http://localhost:3000/products`)
             .then((res) => res.json())
             .then((data) => {
+                console.log(data)
                 setProducts(data);
             });
     }, []);
