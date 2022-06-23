@@ -9,7 +9,6 @@ import Grid from "@mui/material/Grid";
 import { NavLink, useRouteMatch } from "react-router-dom";
 
 const ProductCards = ({ products, currentCategorie }) => {
-    
     return (
         <div style={{ width: "100%" }}>
             <h1>{currentCategorie}</h1>
@@ -25,42 +24,62 @@ const ProductCards = ({ products, currentCategorie }) => {
                 }}
             >
                 {products.map((item) => (
-                    <Card
-                        sx={{
-                            width: 200,
-                            height: 300,
-                            paddingLeft: 2,
-                            paddingRight: 2,
-                            paddingTop: 2,
-                            paddingBottom: 2,
-                            background: "beige",
-                        }}
-                        key={item.id}
-                    >
-                        <NavLink to={`/${item.id}`}>
-                            <CardActionArea>
+                    <NavLink to={`/${item.id}`}>
+                        <CardActionArea>
+                            <Card
+                                sx={{
+                                    width: 200,
+                                    height: 400,
+                                    paddingLeft: 2,
+                                    paddingRight: 2,
+                                    paddingTop: 2,
+                                    paddingBottom: 2,
+                                    border: "outlined",
+                                }}
+                                key={item.id}
+                            >
                                 <CardMedia
                                     component="img"
-                                    height="130"
+                                    height="250"
                                     width="50"
                                     image={item.image}
                                     id={item.id}
                                 />
-                            </CardActionArea>
-                        </NavLink>
 
-                        <CardContent>
-                            <Typography gutterBottom variant="p" component="div">
-                                {item.title}
-                            </Typography>
-                            <Typography gutterBottom variant="p" component="div">
-                                Price: {item.price}$
-                            </Typography>
-                            <Typography gutterBottom variant="p" component="div">
-                                rating: {item.rating.rate}
-                            </Typography>
-                        </CardContent>
-                    </Card>
+                                <CardContent
+                                    sx={{
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "flex-start",
+                                        gap: "3px",
+                                    }}
+                                >
+                                    <Typography
+                                        component="div"
+                                        fontSize={"13px"}
+                                        fontWeight={"bold"}
+                                    >
+                                        {item.title}
+                                    </Typography>
+                                    <Typography
+                                        component="div"
+                                        fontSize={"13px"}
+                                        fontWeight={"bold"}
+                                        paddingTop={"15px"}
+                                    >
+                                        Price: {item.price}$
+                                    </Typography>
+                                    <Typography
+                                        component="div"
+                                        fontSize={"13px"}
+                                        fontWeight={"bold"}
+                                    >
+                                        Rating: {item.rating.rate}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </CardActionArea>
+                    </NavLink>
                 ))}
             </Box>
         </div>
