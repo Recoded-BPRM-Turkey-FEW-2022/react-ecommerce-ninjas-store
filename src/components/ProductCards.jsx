@@ -12,6 +12,7 @@ import Rating from "@mui/material/Rating";
 const ProductCards = ({ products, currentCategorie }) => {
     const [value, setValue] = React.useState(2);
     return (
+        
         <div style={{ width: "100%" }}>
             <h1>{currentCategorie}</h1>
 

@@ -25,7 +25,8 @@ export default function ButtonAppBar({
   getTotalItems,
   cartOpen,
   setCartOpen,
-  cartItems
+  cartItems,
+  setCartItems
 }) {
   const [categorie, setcategorie] = React.useState("");
   const [filter, setfilter] = React.useState("");
@@ -225,7 +226,7 @@ export default function ButtonAppBar({
         
         : null}
 
-          <Button color="inherit" onClick={() => navigate("/ShoppingItem")}>Cart</Button>
+          {/* <Button color="inherit" onClick={() => navigate("/ShoppingItem")}>Cart</Button> */}
           <ButtonBase style={{ float: 'right', margin: 10 }} onClick={() => setCartOpen(true)}>
                 <Badge badgeContent={getTotalItems()} color="error">
                     <AddShoppingCartIcon />
@@ -234,6 +235,7 @@ export default function ButtonAppBar({
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     cartItems={cartItems}
+                    setCartItems={setCartItems}
                 />
               </Drawer>
         </Toolbar>

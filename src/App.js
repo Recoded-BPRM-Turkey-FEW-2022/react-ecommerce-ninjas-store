@@ -14,6 +14,7 @@ import ShoppingItem from "./components/ShoppingItem";
 
 const data = JSON.parse(localStorage.getItem("cartItems")) || [];
 
+
 export default function App() {
 
     const [products, setProducts] = useState([]);
@@ -56,18 +57,8 @@ export default function App() {
 
     return (
         <Router>
-            {/* <ButtonBase style={{ float: 'right', margin: 10 }} onClick={() => setCartOpen(true)}>
-                <Badge badgeContent={getTotalItems()} color="error">
-                    <AddShoppingCartIcon />
-                </Badge>
-            </ButtonBase>
-            <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
-                <Cart
-                    cartItems={cartItems}
-                />
-            </Drawer> */}
             <div>
-                <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} getTotalItems={getTotalItems} cartOpen={cartOpen} setCartOpen={setCartOpen} cartItems={cartItems} />
+                <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} getTotalItems={getTotalItems} cartOpen={cartOpen} setCartOpen={setCartOpen} cartItems={cartItems} setCartItems={setCartItems}/>
                 <Routes>
                     <Route
                         exact
@@ -82,7 +73,7 @@ export default function App() {
                     <Route
                         exact
                         path="/ShoppingItem"
-                        element={<ShoppingItem cartItems={cartItems} />}
+                        element={<ShoppingItem cartItems={cartItems} setCartItems={setCartItems} />}
                     ></Route>
                 </Routes>
             </div>

@@ -1,5 +1,5 @@
 import { Typography, Divider, Box, Grid, Button } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CartItem from '../components/Cart/CartItem';
 import Paper from '@mui/material/Paper';
 import ButtonBase from '@mui/material/ButtonBase';
@@ -10,10 +10,14 @@ import { CardActionArea } from "@mui/material";
 import { NavLink, useRouteMatch } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const Cart = ({ cartItems }) => {
+const Cart = ({ cartItems, setCartItems }) => {
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+}, [cartItems]);
+
   const calculateTotal = () => {
     let total = cartItems.reduce((acc, item) => acc + item.price, 0);
-    console.log(total)
 
     return total;
   }
@@ -62,34 +66,10 @@ const Cart = ({ cartItems }) => {
                     </Typography>
                   </Grid>
                   <Button variant="text" onClick={() => {
-                      for (let i = 0; i <= cartItems.length; i++) {
-                        if (item.id === cartItems[i].id) {
-                          cartItems.splice(i, 1);
-                          console.log("item deleted");
-                          localStorage.setItem("cartItems", JSON.stringify(cartItems));
-                          break;
-                        }
-                      }
+                    setCartItems(cartItems.filter(cartItems => cartItems.id !== item.id));
                       }}>Remove</Button>
-                  {/* <Grid item xs={8} sx={{ paddingLeft: 24 }}>
-
-                    <Button variant="text" onClick={() => {
-
-                      for (let i = 0; i <= cartItems.length; i++) {
-                        if (item.id === cartItems[i].id) {
-                          cartItems.splice(i, 1);
-                          console.log("item deleted");
-                          localStorage.setItem("cartItems", JSON.stringify(cartItems));
-                          break;
-                        }
-                      }
-                    }}>Remove</Button>
-                  </Grid> */}
+                  
                 </Grid>
-                {/* <Grid item>
-                    {/* <Typography sx={{ cursor: 'pointer' }} variant="body2">
-                      Remove
-                    </Typography> */}
               </Grid>
             </Grid>
             <Grid item>
@@ -113,7 +93,7 @@ const Cart = ({ cartItems }) => {
           Total: ${calculateTotal().toFixed(2)}
         </Typography>
         {cartItems.length === 0 ? null : <Button variant="text" onClick={() => {
-          window.localStorage.clear();
+          setCartItems([]);
         }}>Remove All</Button>}
       </Grid>
       {/* <Grid container sx={{
