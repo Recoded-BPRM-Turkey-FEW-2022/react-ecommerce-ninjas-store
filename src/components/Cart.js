@@ -1,59 +1,125 @@
-import { Typography, Divider, Box, Grid } from "@mui/material";
-import React, { useState, useEffect } from "react";
-import ProductDetails from "./productPage/ProductDetails";
-import CartItem from "./Cart/CartItem";
-
+import { Typography, Divider, Box, Grid, Button } from '@mui/material';
+import React, { useState } from 'react';
+import CartItem from '../components/Cart/CartItem';
+import Paper from '@mui/material/Paper';
+import ButtonBase from '@mui/material/ButtonBase';
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import { CardActionArea } from "@mui/material";
+import { NavLink, useRouteMatch } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Button from '@mui/material/Button';
 
 const Cart = ({ cartItems }) => {
+  const calculateTotal = () => {
+    let total = cartItems.reduce((acc, item) => acc + item.price, 0);
+    console.log(total)
 
-  useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-}, [cartItems]);
-
+    return total;
+  }
+  calculateTotal()
   return (
     <>
-      <Grid container direction="column" style={{ width: 500, padding: 20 }}>
-        <h2>Your Cart sd</h2>
+      <Grid container style={{ width: 500, padding: 20 }}>
+        <h2>Your Cart </h2>
+        <Grid container sx={{
+          margin: 'auto',
+          maxWidth: 500,
+          flexGrow: 1,
+          backgroundColor: (theme) =>
+            theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+        }}>
+          <Typography variant='subtitle1'>
+            {cartItems.length === 0 ? <p>No items in cart.</p> : null}
+          </Typography>
 
-        <Typography sx={{fontWeight: "bold"}}>{cartItems.length} item</Typography>
+        </Grid>
 
-        {cartItems.length === 0 ? <p>No items in cart.</p> : null}
+        {cartItems.map((item, index) => (
+          <Paper
+            sx={{
+              p: 2,
+              margin: '8 auto',
+              maxWidth: 500,
+              flexGrow: 1,
+              backgroundColor: (theme) =>
+                theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+            }}
+            key={index}
+          >
+            <Grid container spacing={2}>
+              <Grid item>
+                <ButtonBase sx={{ width: 128, height: 128 }}>
+                  <img src={item.image} style={{ width: 150, height: 150 }} />
+                </ButtonBase>
+              </Grid>
+              <Grid item xs={12} sm container>
+                <Grid item xs container direction="column" spacing={2}>
+                  <Grid item xs>
+                    <h3>{item.title}</h3>
+                    <Typography variant="subtitle" >
+                      Price: ${item.price}
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={8} sx={{ paddingLeft: 24 }}>
 
-        {cartItems.map((item) => (
-          <Grid container sx={{ color: "text.primary", width: 500 }} key={item.id}>
+                    <Button variant="text" onClick={() => {
 
-            <Grid item xs={4}>
-              <Typography>{item.title}</Typography>
+                      for (let i = 0; i <= cartItems.length; i++) {
+                        if (item.id === cartItems[i].id) {
+                          cartItems.splice(i, 1);
+                          console.log("item deleted");
+                          localStorage.setItem("cartItems", JSON.stringify(cartItems));
+                          break;
+                        }
+                      }
+                    }}>Remove</Button>
+                  </Grid>
+                </Grid>
+                {/* <Grid item>
+                    {/* <Typography sx={{ cursor: 'pointer' }} variant="body2">
+                      Remove
+                    </Typography> */}
+              </Grid>
             </Grid>
-
-            <Grid item xs={8} sx={{paddingLeft: 24}}>
-
-            <Button variant="text" onClick={() => {
-
-              for(let i = 0; i <= cartItems.length; i++) {
-                if(item.id === cartItems[i].id) {
-                  cartItems.splice(i, 1);
-                  console.log("item deleted");
-                  localStorage.setItem("cartItems", JSON.stringify(cartItems));
-                  break;
-                }
-              }
-            }}>Remove</Button>
-              {/* <DeleteIcon /> */}
+            <Grid item>
+              <Typography variant="subtitle1">
+                fsdf
+              </Typography>
             </Grid>
-
-          </Grid>
-        ))}
-
+          </Paper>
+        ))
+        }
+      </Grid >
+      <Grid container sx={{
+        p: 2,
+        margin: 'auto',
+        maxWidth: 500,
+        flexGrow: 1,
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+      }}>
+        <Typography variant="h5" >
+          Total: ${calculateTotal().toFixed(2)}
+        </Typography>
         {cartItems.length === 0 ? null : <Button variant="text" onClick={() => {
           window.localStorage.clear();
         }}>Remove All</Button>}
-        
       </Grid>
+      {/* <Grid container sx={{
+        p: 2,
+        margin: 'auto',
+        maxWidth: 500,
+        flexGrow: 1,
+        backgroundColor: (theme) =>
+          theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+      }}> */}
+      <Button variant="contained" href="#contained-buttons" color="success" sx={{ borderRadius: '0' }}>
+        Proceed to Payment
+      </Button>
+      {/* </Grid> */}
     </>
-  );
-};
+  )
+}
 
 export default Cart;

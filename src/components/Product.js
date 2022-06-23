@@ -9,9 +9,7 @@ import { useState, useEffect } from "react";
 import { BrowserRouter as Router, useParams } from "react-router-dom";
 
 const Product = ({ onAdd }) => {
-
     const [productInfo, setProductInfo] = React.useState([]);
-    const [selectedImage, setSelectedImage] = useState();
 
     let { id } = useParams();
 
@@ -21,7 +19,6 @@ const Product = ({ onAdd }) => {
             .then((data) => {
                 // console.log(data);
                 setProductInfo(data);
-                setSelectedImage(productInfo.image);
             });
     };
 
