@@ -5,7 +5,7 @@ import IconButton from "@mui/material/IconButton";
 import Button from '@mui/material/Button';
 import { Typography } from "@mui/material";
 
-const ShoppingItem = ({ cartItems }) => {
+const ShoppingItem = ({ cartItems, setCartItems }) => {
 
   return (
     <div style={{ width: "100%" }}>
@@ -59,15 +59,7 @@ const ShoppingItem = ({ cartItems }) => {
             </select>
 
             <IconButton variant="outlined" onClick={() => {
-
-                for(let i = 0; i <= cartItems.length; i++) {
-                if(item.id === cartItems[i].id) {
-                    cartItems.splice(i, 1);
-                    console.log("item deleted");
-                    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-                    break;
-                }
-                }
+              setCartItems(cartItems.filter(cartItems => cartItems.id !== item.id));
                 }}>
 
               <DeleteOutlineOutlinedIcon />
@@ -78,7 +70,7 @@ const ShoppingItem = ({ cartItems }) => {
       ))}
 
       {cartItems.length === 0 ? null : <Button variant="text" onClick={() => {
-          window.localStorage.clear();
+          setCartItems([]);
         }}>Remove All</Button>}
 
     </div>
