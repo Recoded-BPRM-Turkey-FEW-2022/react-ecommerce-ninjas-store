@@ -41,7 +41,7 @@ export default function App() {
 
     return (
         <Router>
-            <Badge badgeContent={getTotalItems(cartItems)} color="error">
+            <Badge color="error">
 
             </Badge>
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>

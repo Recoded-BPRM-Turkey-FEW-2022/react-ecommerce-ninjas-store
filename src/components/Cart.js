@@ -83,18 +83,18 @@ const Cart = ({ cartItems }) => {
           Total: ${calculateTotal().toFixed(2)}
         </Typography>
       </Grid>
-      <Grid container sx={{
+      {/* <Grid container sx={{
         p: 2,
         margin: 'auto',
         maxWidth: 500,
         flexGrow: 1,
         backgroundColor: (theme) =>
           theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-      }}>
-        <Button variant="contained" href="#contained-buttons" color="success">
-          Continue to Payment
-        </Button>
-      </Grid>
+      }}> */}
+      <Button variant="contained" href="#contained-buttons" color="success">
+        Continue to Payment
+      </Button>
+      {/* </Grid> */}
     </>
   )
 }
