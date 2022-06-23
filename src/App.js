@@ -7,13 +7,13 @@ import Product from "./components/Product";
 import ProductCards from "./components/ProductCards";
 import Cart from './components/Cart'
 import Drawer from '@mui/material/Drawer';
-import { Badge } from "@mui/material";
+import { Badge, ButtonBase } from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const data = JSON.parse(localStorage.getItem('cartItems')) || []
 export default function App() {
     const [products, setProducts] = useState([]);
-    const [cartOpen, setCartOpen] = useState(true);
+    const [cartOpen, setCartOpen] = useState(false);
     const [cartItems, setCartItems] = useState(data);
 
     useEffect(() => {
@@ -42,16 +42,18 @@ export default function App() {
 
     return (
         <Router>
-            <Badge>
-                <AddShoppingCartIcon />
-            </Badge>
+            <ButtonBase style={{ float: 'right' }} onClick={() => setCartOpen(true)}>
+                <Badge color="error">
+                    <AddShoppingCartIcon />
+                </Badge>
+            </ButtonBase>
             <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
                 <Cart
                     cartItems={cartItems}
                 />
             </Drawer>
             <div>
-                <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} />
+                {/* <Navbar products={products} setProducts={setProducts} cartOpen={cartOpen} /> */}
                 <Routes>
                     <Route
                         exact
