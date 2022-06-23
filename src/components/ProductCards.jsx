@@ -7,8 +7,10 @@ import { CardActionArea } from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { NavLink, useRouteMatch } from "react-router-dom";
+import Rating from "@mui/material/Rating";
 
 const ProductCards = ({ products, currentCategorie }) => {
+    const [value, setValue] = React.useState(2);
     return (
         <div style={{ width: "100%" }}>
             <h1>{currentCategorie}</h1>
@@ -29,7 +31,7 @@ const ProductCards = ({ products, currentCategorie }) => {
                             <Card
                                 sx={{
                                     width: 200,
-                                    height: 400,
+                                    height: 410,
                                     paddingLeft: 2,
                                     paddingRight: 2,
                                     paddingTop: 2,
@@ -56,7 +58,7 @@ const ProductCards = ({ products, currentCategorie }) => {
                                 >
                                     <Typography
                                         component="div"
-                                        fontSize={"13px"}
+                                        fontSize={"12px"}
                                         fontWeight={"bold"}
                                     >
                                         {item.title}
@@ -65,17 +67,16 @@ const ProductCards = ({ products, currentCategorie }) => {
                                         component="div"
                                         fontSize={"13px"}
                                         fontWeight={"bold"}
-                                        paddingTop={"15px"}
                                     >
                                         Price: {item.price}$
                                     </Typography>
-                                    <Typography
-                                        component="div"
-                                        fontSize={"13px"}
-                                        fontWeight={"bold"}
-                                    >
-                                        Rating: {item.rating.rate}
-                                    </Typography>
+
+                                    <Typography component="legend"></Typography>
+                                    <Rating
+                                        name="read-only"
+                                        value={item.rating.rate}
+                                        readOnly
+                                    />
                                 </CardContent>
                             </Card>
                         </CardActionArea>
