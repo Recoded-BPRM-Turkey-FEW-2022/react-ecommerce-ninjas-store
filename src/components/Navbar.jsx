@@ -26,7 +26,8 @@ export default function ButtonAppBar({
   cartOpen,
   setCartOpen,
   cartItems,
-  setCartItems
+  setCartItems,
+  onAdd
 }) {
   const [categorie, setcategorie] = React.useState("");
   const [filter, setfilter] = React.useState("");
@@ -88,14 +89,14 @@ export default function ButtonAppBar({
     setProducts(sorted);
   }
 
-//   console.log(window.location.href);
+  //   console.log(window.location.href);
 
   return (
-    <Box sx={{ flexGrow: 1}}>
+    <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor: "pointer"}} onClick={() => {
+
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor: "pointer" }} onClick={() => {
             navigate("/Products");
             noCatogorie();
             setcategorie("");
@@ -104,140 +105,141 @@ export default function ButtonAppBar({
             Store
           </Typography>
 
-          {window.location.href === `http://localhost:3000/Products`  ?
-          
-          <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="demo-select-small" style={{ color: "white" }}>
-              Categorie
-            </InputLabel>
-            <Select
-              labelId="demo-select-small"
-              id="demo-select-small"
-              value={categorie}
-              label="categorie"
-              onChange={categorieHandleChange}
-            >
-              <MenuItem
-                value={0}
-                onClick={() => {
-                  noCatogorie();
-                  setCurrentCategorie("Latest Products");
-                }}
-              >
-                <em>All</em>
-              </MenuItem>
-              <MenuItem
-                value={1}
-                onClick={() => {
-                  categoriesFilter("jewelery");
-                  setCurrentCategorie("Jewelery");
-                }}
-              >
-                Jewelery
-              </MenuItem>
-              <MenuItem
-                value={2}
-                onClick={() => {
-                  categoriesFilter("electronics");
-                  setCurrentCategorie("Electronics");
-                }}
-              >
-                Electronics
-              </MenuItem>
-              <MenuItem
-                value={3}
-                onClick={() => {
-                  categoriesFilter("men's clothing");
-                  setCurrentCategorie("Men's clothing");
-                }}
-              >
-                Men's clothing
-              </MenuItem>
-              <MenuItem
-                value={4}
-                onClick={() => {
-                  categoriesFilter("women's clothing");
-                  setCurrentCategorie("Women's clothing");
-                }}
-              >
-                Women's clothing
-              </MenuItem>
-            </Select>
-          </FormControl>
-          
-          : null}
+          {window.location.href === `http://localhost:3000/Products` ?
 
-        {window.location.href === `http://localhost:3000/Products` ? 
-        
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="filter-select-small" style={{ color: "white" }}>
-              Filter by
-            </InputLabel>
-            <Select
-              labelId="filter-select-small"
-              id="filter-select-small"
-              value={filter}
-              label="filter"
-              onChange={filterHandleChange}
-            >
-              <MenuItem
-                value={0}
-                onClick={() => {
-                  nameFitler();
-                }}
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+              <InputLabel id="demo-select-small" style={{ color: "white" }}>
+                Categorie
+              </InputLabel>
+              <Select
+                labelId="demo-select-small"
+                id="demo-select-small"
+                value={categorie}
+                label="categorie"
+                onChange={categorieHandleChange}
               >
-                Name
-              </MenuItem>
-              <MenuItem
-                value={1}
-                onClick={() => {
-                  priceFilterAsc();
-                }}
+                <MenuItem
+                  value={0}
+                  onClick={() => {
+                    noCatogorie();
+                    setCurrentCategorie("Latest Products");
+                  }}
+                >
+                  <em>All</em>
+                </MenuItem>
+                <MenuItem
+                  value={1}
+                  onClick={() => {
+                    categoriesFilter("jewelery");
+                    setCurrentCategorie("Jewelery");
+                  }}
+                >
+                  Jewelery
+                </MenuItem>
+                <MenuItem
+                  value={2}
+                  onClick={() => {
+                    categoriesFilter("electronics");
+                    setCurrentCategorie("Electronics");
+                  }}
+                >
+                  Electronics
+                </MenuItem>
+                <MenuItem
+                  value={3}
+                  onClick={() => {
+                    categoriesFilter("men's clothing");
+                    setCurrentCategorie("Men's clothing");
+                  }}
+                >
+                  Men's clothing
+                </MenuItem>
+                <MenuItem
+                  value={4}
+                  onClick={() => {
+                    categoriesFilter("women's clothing");
+                    setCurrentCategorie("Women's clothing");
+                  }}
+                >
+                  Women's clothing
+                </MenuItem>
+              </Select>
+            </FormControl>
+
+            : null}
+
+          {window.location.href === `http://localhost:3000/Products` ?
+
+            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+              <InputLabel id="filter-select-small" style={{ color: "white" }}>
+                Filter by
+              </InputLabel>
+              <Select
+                labelId="filter-select-small"
+                id="filter-select-small"
+                value={filter}
+                label="filter"
+                onChange={filterHandleChange}
               >
-                Ascending Price
-              </MenuItem>
-              <MenuItem
-                value={2}
-                onClick={() => {
-                  priceFilterDesc();
-                }}
-              >
-                Descending Price
-              </MenuItem>
-              <MenuItem
-                value={3}
-                onClick={() => {
-                  ratingFilterAsc();
-                }}
-              >
-                Ascending Rating
-              </MenuItem>
-              <MenuItem
-                value={4}
-                onClick={() => {
-                  ratingFilterDesc();
-                }}
-              >
-                Descending Rating
-              </MenuItem>
-            </Select>
-          </FormControl>
-        
-        
-        : null}
+                <MenuItem
+                  value={0}
+                  onClick={() => {
+                    nameFitler();
+                  }}
+                >
+                  Name
+                </MenuItem>
+                <MenuItem
+                  value={1}
+                  onClick={() => {
+                    priceFilterAsc();
+                  }}
+                >
+                  Ascending Price
+                </MenuItem>
+                <MenuItem
+                  value={2}
+                  onClick={() => {
+                    priceFilterDesc();
+                  }}
+                >
+                  Descending Price
+                </MenuItem>
+                <MenuItem
+                  value={3}
+                  onClick={() => {
+                    ratingFilterAsc();
+                  }}
+                >
+                  Ascending Rating
+                </MenuItem>
+                <MenuItem
+                  value={4}
+                  onClick={() => {
+                    ratingFilterDesc();
+                  }}
+                >
+                  Descending Rating
+                </MenuItem>
+              </Select>
+            </FormControl>
+
+
+            : null}
 
           {/* <Button color="inherit" onClick={() => navigate("/ShoppingItem")}>Cart</Button> */}
           <ButtonBase style={{ float: 'right', margin: 10 }} onClick={() => setCartOpen(true)}>
-                <Badge badgeContent={getTotalItems()} color="error">
-                    <AddShoppingCartIcon />
-                </Badge>
-            </ButtonBase>
-            <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
-                <Cart
-                    cartItems={cartItems}
-                    setCartItems={setCartItems}
-                />
-              </Drawer>
+            <Badge badgeContent={getTotalItems()} color="error">
+              <AddShoppingCartIcon />
+            </Badge>
+          </ButtonBase>
+          <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+            <Cart
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              onAdd={onAdd}
+            />
+          </Drawer>
         </Toolbar>
       </AppBar>
     </Box>

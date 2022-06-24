@@ -58,7 +58,7 @@ export default function App() {
     return (
         <Router>
             <div>
-                <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} getTotalItems={getTotalItems} cartOpen={cartOpen} setCartOpen={setCartOpen} cartItems={cartItems} setCartItems={setCartItems}/>
+                {/* <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} getTotalItems={getTotalItems} cartOpen={cartOpen} setCartOpen={setCartOpen} cartItems={cartItems} setCartItems={setCartItems} onAdd={onAdd} /> */}
                 <Routes>
                     <Route
                         exact

@@ -9,15 +9,16 @@ import CardMedia from "@mui/material/CardMedia";
 import { CardActionArea } from "@mui/material";
 import { NavLink, useRouteMatch } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
+import CartItemQty from '../components/Cart/CartItemQty';
 
-const Cart = ({ cartItems, setCartItems }) => {
+const Cart = ({ cartItems, setCartItems, onAdd }) => {
 
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
-}, [cartItems]);
+  }, [cartItems]);
 
   const calculateTotal = () => {
-    let total = cartItems.reduce((acc, item) => acc + item.price, 0);
+    let total = cartItems.reduce((acc, item) => acc + item.qty * item.price, 0);
 
     return total;
   }
@@ -65,10 +66,7 @@ const Cart = ({ cartItems, setCartItems }) => {
                       Price: ${item.price}
                     </Typography>
                   </Grid>
-                  <Button variant="text" onClick={() => {
-                    setCartItems(cartItems.filter(cartItems => cartItems.id !== item.id));
-                      }}>Remove</Button>
-                  
+                  <CartItemQty onAdd={onAdd} cartItems={cartItems} setCartItems={setCartItems} item={item} />
                 </Grid>
               </Grid>
             </Grid>

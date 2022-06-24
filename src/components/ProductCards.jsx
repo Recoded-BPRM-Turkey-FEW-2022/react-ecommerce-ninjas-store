@@ -29,10 +29,7 @@ const ProductCards = ({ products, currentCategorie }) => {
             >
                 {products.map((item) => {
                     let title = item.title;
-                    // console.log(title.length)
                     { title.length >= 10 ? title = title.slice(0, 30) : title }
-                    // title = title.slice(0, 10)
-                    console.log(title)
                     return (
                         <>
                             <NavLink to={`/${item.id}`}>
