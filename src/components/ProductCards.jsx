@@ -18,7 +18,6 @@ const ProductCards = ({ products, currentCategorie, isLoading }) => {
     return (
         <div style={{ width: "100%" }}>
             <h1>{currentCategorie}</h1>
-
             <Box
                 sx={{
                     display: "flex",

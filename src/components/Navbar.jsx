@@ -44,7 +44,7 @@ export default function ButtonAppBar({
   };
 
   function categoriesFilter(categorie) {
-    fetch(`http://localhost:3000/products/category/${categorie}`)
+    fetch(`http://localhost:3005/products /category/${categorie}`)
       .then((res) => res.json())
       .then((json) => (
         setProducts(json)
@@ -52,7 +52,7 @@ export default function ButtonAppBar({
   }
 
   function noCatogorie() {
-    fetch(`http://localhost:3000/products`)
+    fetch(`http://localhost:3005/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);

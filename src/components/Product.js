@@ -15,7 +15,7 @@ const Product = ({ onAdd }) => {
     let { id } = useParams();
 
     const fetchData = () => {
-        fetch(`https://fakestoreapi.com/products/${id}`)
+        fetch(`http://localhost:3005/products/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 // console.log(data);
