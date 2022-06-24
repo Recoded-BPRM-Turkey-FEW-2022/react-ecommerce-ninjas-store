@@ -20,12 +20,12 @@ const Product = ({ onAdd }) => {
             .then((data) => {
                 // console.log(data);
                 setProductInfo(data);
+                setLoading(false);
             });
     };
 
     useEffect(() => {
         fetchData();
-        setLoading(false);
     }, []);
 
     return (
