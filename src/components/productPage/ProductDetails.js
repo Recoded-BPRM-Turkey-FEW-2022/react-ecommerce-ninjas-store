@@ -21,16 +21,16 @@ const productDetails = ({ title, description, price, category, image, onAdd, pro
             </Box>
             <Divider style={{ marginBottom: "2" }} />
 
-            <Link to="/Cart">
-                <Button
-                    variant="contained"
-                    color="primary"
-                    style={{ marginTop: "auto" }}
-                    onClick={() => { onAdd(productInfo) }}
-                >
-                    Add to cart
-                </Button>
-            </Link>
+
+            <Button
+                variant="contained"
+                color="primary"
+                style={{ marginTop: "auto" }}
+                onClick={() => { onAdd(productInfo) }}
+            >
+                Add to cart
+            </Button>
+
         </Grid>
     );
 }
