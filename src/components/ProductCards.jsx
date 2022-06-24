@@ -31,17 +31,14 @@ const ProductCards = ({ products, currentCategorie, isLoading }) => {
             >
                 {products.map((item) => {
                     let title = item.title;
-                    // console.log(title.length)
                     {
                         title.length >= 10
                             ? (title = title.slice(0, 30))
                             : title;
                     }
-                    // title = title.slice(0, 10)
-
                     return (
                         <>
-                            <NavLink to={`/${item.id}`}>
+                            <NavLink to={`/products/${item.id}`}>
                                 <CardActionArea>
                                     {isLoading ? (
                                         <Box

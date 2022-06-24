@@ -74,11 +74,11 @@ const Product = ({ onAdd }) => {
                     productInfo={productInfo}
                 />
             </Grid>
-            <Grid sm={3} height="500"></Grid>
+            {/* <Grid sm={3} height="500"></Grid>
             <Grid sm={4}>Review:</Grid>
             <Grid sm={8}>
                 <ProductReview review={productInfo} />
-            </Grid>
+            </Grid> */}
         </Grid>
     );
 };

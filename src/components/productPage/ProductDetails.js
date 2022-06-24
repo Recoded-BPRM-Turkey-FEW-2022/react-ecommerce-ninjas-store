@@ -7,31 +7,32 @@ const productDetails = ({ title, description, price, category, image, onAdd, pro
 
     return (
 
-    <Grid container direction="column" style={{ height: "100 %" }}>
-        <Typography variant="subtitle1">{category}</Typography>
-        <Divider />
-        <Box mt={2}>
-            <Typography variant="h5">{title}</Typography>
+        <Grid container direction="column" style={{ height: "100 %" }}>
+            <Typography variant="subtitle1">{category}</Typography>
             <Divider />
-            <Typography variant="subtitle5">
-                description: {description}
-            </Typography>
-            <Divider />
-            <Typography variant="h5">price: {price}$</Typography>
-        </Box>
-        <Divider style={{ marginBottom: "2" }} />
+            <Box mt={2}>
+                <Typography variant="h5">{title}</Typography>
+                <Divider />
+                <Typography variant="subtitle5">
+                    description: {description}
+                </Typography>
+                <Divider />
+                <Typography variant="h5">price: {price}$</Typography>
+            </Box>
+            <Divider style={{ marginBottom: "2" }} />
 
-        <Link to="/ShoppingItem">
+
             <Button
                 variant="contained"
                 color="primary"
                 style={{ marginTop: "auto" }}
-                onClick={() => {onAdd(productInfo)}}
+                onClick={() => { onAdd(productInfo) }}
             >
-                Purchase{" "}
+                Add to cart
             </Button>
-        </Link>
-    </Grid>
-);}
+
+        </Grid>
+    );
+}
 
 export default productDetails;

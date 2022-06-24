@@ -20,7 +20,7 @@ export default function App() {
     const [currentCategorie, setCurrentCategorie] = useState("Latest Products");
     const [isLoading, setLoading] = useState(true);
     useEffect(() => {
-        fetch(`http://localhost:3000/products`)
+        fetch(`http://localhost:3005/products`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
@@ -65,11 +65,12 @@ export default function App() {
                     setCartOpen={setCartOpen}
                     cartItems={cartItems}
                     setCartItems={setCartItems}
+                    onAdd={onAdd}
                 />
                 <Routes>
                     <Route
                         exact
-                        path="/Products"
+                        path="/"
                         element={
                             <ProductCards
                                 products={products}
@@ -80,7 +81,7 @@ export default function App() {
                     ></Route>
                     <Route
                         exact
-                        path="/:id"
+                        path="/products/:id"
                         element={<Product onAdd={onAdd} />}
                     />
                     <Route
