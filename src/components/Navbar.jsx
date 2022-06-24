@@ -3,6 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 
@@ -10,14 +11,13 @@ import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import Drawer from '@mui/material/Drawer';
+import Drawer from "@mui/material/Drawer";
 import { Badge, ButtonBase } from "@mui/material";
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-import Cart from './Cart';
-import Divider from '@mui/material/Divider';
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import Cart from "./Cart";
+import Divider from "@mui/material/Divider";
 
 import { useNavigate, Link } from "react-router-dom";
-
 
 export default function ButtonAppBar({
   products,
@@ -28,22 +28,25 @@ export default function ButtonAppBar({
   setCartOpen,
   cartItems,
   setCartItems,
-  onAdd
+  onAdd,
 }) {
   const [categorie, setcategorie] = React.useState("");
   const [filter, setfilter] = React.useState("");
   const [filteredProducts, setFilteredProducts] = React.useState(products);
+  const [name, setName] = React.useState("");
 
   const navigate = useNavigate();
 
   const categorieHandleChange = (event) => {
     setcategorie(event.target.value);
+    setName("");
     setfilter("");
   };
 
   const filterHandleChange = (event) => {
     setfilter(event.target.value);
   };
+  
 
   // function categoriesFilter(categorie) {
   //   fetch(`http://localhost:3005/products /category/${categorie}`)
@@ -60,7 +63,6 @@ export default function ButtonAppBar({
         setProducts(data.filter((product) => product.category === categorie));
       });
   }
-
 
   function noCatogorie() {
     fetch(`http://localhost:3005/products`)
@@ -102,26 +104,99 @@ export default function ButtonAppBar({
     setProducts(sorted);
   }
 
-  //   console.log(window.location.href);
+  function searchByName() {
+    fetch(`http://localhost:3005/products`)
+      .then((res) => res.json())
+      .then((data) => {
+        setProducts(
+          data.filter((product) =>
+            product.title.toLowerCase().includes(name.toLowerCase())
+          )
+        );
+      });
+  }
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor: "pointer" }} onClick={() => {
-            navigate("/");
-            noCatogorie();
-            setcategorie("");
-            setfilter("");
-          }} style={{}}>
+          <Typography
+            variant="h6"
+            component="div"
+            sx={{ flexGrow: 1, cursor: "pointer" }}
+            onClick={() => {
+              navigate("/");
+              noCatogorie();
+              setcategorie("");
+              setfilter("");
+              setName("");
+            }}
+            style={{}}
+          >
             Store
           </Typography>
 
-          {window.location.href === `http://localhost:3000/` ?
+          {window.location.href === `http://localhost:3000/` ? (
+            <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              sx={{ input: { color: "white" } }}
+              InputLabelProps={{
+                style: { color: "#fff" },
+              }}
+              id="search"
+              label="Search"
+              variant="standard"
+              name="name"
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+                searchByName();
+                setcategorie("");
+                setfilter("");
+              }}
+            />
+          </Box>)
+          : null
+          }
+
+          {/* <Box
+            component="form"
+            sx={{
+              "& > :not(style)": { m: 1, width: "25ch" },
+            }}
+            noValidate
+            autoComplete="off"
+          >
+            <TextField
+              sx={{ input: { color: "white" } }}
+              InputLabelProps={{
+                style: { color: "#fff" },
+              }}
+              id="search"
+              label="Search"
+              variant="standard"
+              name="name"
+              value={name}
+              onChange={(event) => {
+                setName(event.target.value);
+                searchByName();
+                setcategorie("");
+                setfilter("");
+              }}
+            />
+          </Box> */}
+
+          {window.location.href === `http://localhost:3000/` ? (
             <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
               <InputLabel id="demo-select-small" style={{ color: "white" }}>
-                Categorie
+                Categories
               </InputLabel>
               <Select
                 labelId="demo-select-small"
@@ -178,11 +253,9 @@ export default function ButtonAppBar({
                 </MenuItem>
               </Select>
             </FormControl>
+          ) : null}
 
-            : null}
-
-          {window.location.href === `http://localhost:3000/` ?
-
+          {window.location.href === `http://localhost:3000/` ? (
             <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
               <InputLabel id="filter-select-small" style={{ color: "white" }}>
                 Sort by
@@ -238,14 +311,21 @@ export default function ButtonAppBar({
                 </MenuItem>
               </Select>
             </FormControl>
-            : null}
+          ) : null}
           {/* <Button color="inherit" onClick={() => navigate("/ShoppingItem")}>Cart</Button> */}
-          <ButtonBase style={{ float: 'right', margin: 10 }} onClick={() => setCartOpen(true)}>
+          <ButtonBase
+            style={{ float: "right", margin: 10 }}
+            onClick={() => setCartOpen(true)}
+          >
             <Badge badgeContent={getTotalItems()} color="error">
               <AddShoppingCartIcon />
             </Badge>
           </ButtonBase>
-          <Drawer anchor="right" open={cartOpen} onClose={() => setCartOpen(false)}>
+          <Drawer
+            anchor="right"
+            open={cartOpen}
+            onClose={() => setCartOpen(false)}
+          >
             <Cart
               cartItems={cartItems}
               setCartItems={setCartItems}

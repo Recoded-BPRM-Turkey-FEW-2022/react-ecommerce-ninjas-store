@@ -23,7 +23,6 @@ export default function App() {
         fetch(`http://localhost:3005/products`)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 setProducts(data);
                 setLoading(false);
             });
@@ -49,7 +48,6 @@ export default function App() {
 
     const getTotalItems = () => {
         let badgeContent = cartItems.reduce((acc, item) => acc + item.qty, 0);
-        console.log(badgeContent);
         return badgeContent;
     };
 
