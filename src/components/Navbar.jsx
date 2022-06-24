@@ -14,6 +14,7 @@ import Drawer from '@mui/material/Drawer';
 import { Badge, ButtonBase } from "@mui/material";
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import Cart from './Cart';
+import Divider from '@mui/material/Divider';
 
 import { useNavigate, Link } from "react-router-dom";
 
@@ -31,6 +32,7 @@ export default function ButtonAppBar({
 }) {
   const [categorie, setcategorie] = React.useState("");
   const [filter, setfilter] = React.useState("");
+  const [filteredProducts, setFilteredProducts] = React.useState(products);
 
   const navigate = useNavigate();
 
@@ -43,13 +45,22 @@ export default function ButtonAppBar({
     setfilter(event.target.value);
   };
 
+  // function categoriesFilter(categorie) {
+  //   fetch(`http://localhost:3005/products /category/${categorie}`)
+  //     .then((res) => res.json())
+  //     .then((json) => (
+  //       setProducts(json)
+  //     ))
+  // }
+
   function categoriesFilter(categorie) {
-    fetch(`http://localhost:3005/products /category/${categorie}`)
+    fetch(`http://localhost:3005/products`)
       .then((res) => res.json())
-      .then((json) => (
-        setProducts(json)
-      ))
+      .then((data) => {
+        setProducts(data.filter((product) => product.category === categorie));
+      });
   }
+
 
   function noCatogorie() {
     fetch(`http://localhost:3005/products`)
@@ -108,7 +119,7 @@ export default function ButtonAppBar({
           </Typography>
 
           {window.location.href === `http://localhost:3000/` ?
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
               <InputLabel id="demo-select-small" style={{ color: "white" }}>
                 Categorie
               </InputLabel>
@@ -128,6 +139,7 @@ export default function ButtonAppBar({
                 >
                   <em>All</em>
                 </MenuItem>
+                <Divider />
                 <MenuItem
                   value={1}
                   onClick={() => {
@@ -171,9 +183,9 @@ export default function ButtonAppBar({
 
           {window.location.href === `http://localhost:3000/` ?
 
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+            <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
               <InputLabel id="filter-select-small" style={{ color: "white" }}>
-                Filter by
+                Sort by
               </InputLabel>
               <Select
                 labelId="filter-select-small"
@@ -190,6 +202,7 @@ export default function ButtonAppBar({
                 >
                   Name
                 </MenuItem>
+                <Divider />
                 <MenuItem
                   value={1}
                   onClick={() => {
@@ -206,6 +219,7 @@ export default function ButtonAppBar({
                 >
                   Descending Price
                 </MenuItem>
+                <Divider />
                 <MenuItem
                   value={3}
                   onClick={() => {
