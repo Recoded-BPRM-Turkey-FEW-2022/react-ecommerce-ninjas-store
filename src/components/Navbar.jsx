@@ -44,13 +44,15 @@ export default function ButtonAppBar({
   };
 
   function categoriesFilter(categorie) {
-    fetch(`https://fakestoreapi.com/products/category/${categorie}`)
+    fetch(`http://localhost:3000/products/category/${categorie}`)
       .then((res) => res.json())
-      .then((json) => setProducts(json));
+      .then((json) => (
+        setProducts(json)
+      ))
   }
 
   function noCatogorie() {
-    fetch(`https://fakestoreapi.com/products`)
+    fetch(`http://localhost:3000/products`)
       .then((res) => res.json())
       .then((data) => {
         setProducts(data);
@@ -97,7 +99,7 @@ export default function ButtonAppBar({
         <Toolbar>
 
           <Typography variant="h6" component="div" sx={{ flexGrow: 1, cursor: "pointer" }} onClick={() => {
-            navigate("/Products");
+            navigate("/");
             noCatogorie();
             setcategorie("");
             setfilter("");
@@ -105,8 +107,7 @@ export default function ButtonAppBar({
             Store
           </Typography>
 
-          {window.location.href === `http://localhost:3000/Products` ?
-
+          {window.location.href === `http://localhost:3000/` ?
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel id="demo-select-small" style={{ color: "white" }}>
                 Categorie
@@ -168,7 +169,7 @@ export default function ButtonAppBar({
 
             : null}
 
-          {window.location.href === `http://localhost:3000/Products` ?
+          {window.location.href === `http://localhost:3000/` ?
 
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
               <InputLabel id="filter-select-small" style={{ color: "white" }}>
@@ -223,10 +224,7 @@ export default function ButtonAppBar({
                 </MenuItem>
               </Select>
             </FormControl>
-
-
             : null}
-
           {/* <Button color="inherit" onClick={() => navigate("/ShoppingItem")}>Cart</Button> */}
           <ButtonBase style={{ float: 'right', margin: 10 }} onClick={() => setCartOpen(true)}>
             <Badge badgeContent={getTotalItems()} color="error">

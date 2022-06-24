@@ -32,7 +32,7 @@ const ProductCards = ({ products, currentCategorie }) => {
                     { title.length >= 10 ? title = title.slice(0, 30) : title }
                     return (
                         <>
-                            <NavLink to={`/${item.id}`}>
+                            <NavLink to={`/products/${item.id}`}>
                                 <CardActionArea>
                                     <Card
                                         sx={{

@@ -62,12 +62,12 @@ export default function App() {
                 <Routes>
                     <Route
                         exact
-                        path="/Products"
+                        path="/"
                         element={<ProductCards products={products} currentCategorie={currentCategorie} />}
                     ></Route>
                     <Route
                         exact
-                        path="/:id"
+                        path="/products/:id"
                         element={<Product onAdd={onAdd} />}
                     />
                     <Route
