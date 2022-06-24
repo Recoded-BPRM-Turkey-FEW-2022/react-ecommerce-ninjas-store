@@ -8,11 +8,12 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import { NavLink, useRouteMatch } from "react-router-dom";
 import Rating from "@mui/material/Rating";
+import { lightBlue } from "@mui/material/colors";
 
 const ProductCards = ({ products, currentCategorie }) => {
     const [value, setValue] = React.useState(2);
     return (
-        
+
         <div style={{ width: "100%" }}>
             <h1>{currentCategorie}</h1>
 
@@ -26,63 +27,73 @@ const ProductCards = ({ products, currentCategorie }) => {
                     gap: "10px",
                 }}
             >
-                {products.map((item) => (
-                    <NavLink to={`/${item.id}`}>
-                        <CardActionArea>
-                            <Card
-                                sx={{
-                                    width: 200,
-                                    height: 410,
-                                    paddingLeft: 2,
-                                    paddingRight: 2,
-                                    paddingTop: 2,
-                                    paddingBottom: 2,
-                                    border: "outlined",
-                                }}
-                                key={item.id}
-                            >
-                                <CardMedia
-                                    component="img"
-                                    height="250"
-                                    width="50"
-                                    image={item.image}
-                                    id={item.id}
-                                />
-
-                                <CardContent
-                                    sx={{
-                                        display: "flex",
-                                        flexDirection: "column",
-                                        alignItems: "flex-start",
-                                        gap: "3px",
-                                    }}
-                                >
-                                    <Typography
-                                        component="div"
-                                        fontSize={"12px"}
-                                        fontWeight={"bold"}
+                {products.map((item) => {
+                    let title = item.title;
+                    // console.log(title.length)
+                    { title.length >= 10 ? title = title.slice(0, 30) : title }
+                    // title = title.slice(0, 10)
+                    console.log(title)
+                    return (
+                        <>
+                            <NavLink to={`/${item.id}`}>
+                                <CardActionArea>
+                                    <Card
+                                        sx={{
+                                            width: 200,
+                                            height: 360,
+                                            paddingLeft: 1,
+                                            paddingRight: 1,
+                                            paddingTop: 2,
+                                            paddingBottom: 2,
+                                            border: 1,
+                                            borderColor: "lightBlue",
+                                        }}
+                                        key={item.id}
                                     >
-                                        {item.title}
-                                    </Typography>
-                                    <Typography
-                                        component="div"
-                                        fontSize={"13px"}
-                                        fontWeight={"bold"}
-                                    >
-                                        Price: {item.price}$
-                                    </Typography>
+                                        <CardMedia
+                                            component="img"
+                                            height="250"
+                                            width="50"
+                                            image={item.image}
+                                            id={item.id}
+                                        />
+                                        <CardContent
+                                            sx={{
+                                                display: "flex",
+                                                flexDirection: "column",
+                                                alignItems: "flex-start",
+                                                gap: "3px",
+                                            }}
+                                        >
+                                            <Typography
+                                                component="div"
+                                                fontSize={"12px"}
+                                                fontWeight={"bold"}
+                                                margin={0}
+                                            >
+                                                {title}
+                                            </Typography>
+                                            <Typography
+                                                component="div"
+                                                fontSize={"13px"}
+                                                fontWeight={"bold"}
+                                            >
+                                                Price: {item.price}$
+                                            </Typography>
 
-                                    <Typography component="legend"></Typography>
-                                    <Rating
-                                        name="read-only"
-                                        value={item.rating.rate}
-                                        readOnly
-                                    />
-                                </CardContent>
-                            </Card>
-                        </CardActionArea>
-                    </NavLink>
-                ))}
+                                            <Typography component="legend"></Typography>
+                                            <Rating
+                                                name="read-only"
+                                                value={item.rating.rate}
+                                                readOnly
+                                            />
+                                        </CardContent>
+                                    </Card>
+                                </CardActionArea>
+                            </NavLink>
+                        </>
+                    )
+                })}
             </Box>
         </div>
     );
