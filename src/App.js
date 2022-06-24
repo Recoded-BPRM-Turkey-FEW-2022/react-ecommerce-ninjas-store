@@ -23,7 +23,7 @@ export default function App() {
     const [currentCategorie, setCurrentCategorie] = useState("Latest Products");
 
     useEffect(() => {
-        fetch(`http://localhost:3000/products`)
+        fetch(`http://localhost:3005/products`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data)
@@ -58,7 +58,7 @@ export default function App() {
     return (
         <Router>
             <div>
-                {/* <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} getTotalItems={getTotalItems} cartOpen={cartOpen} setCartOpen={setCartOpen} cartItems={cartItems} setCartItems={setCartItems} onAdd={onAdd} /> */}
+                <Navbar products={products} setProducts={setProducts} setCurrentCategorie={setCurrentCategorie} getTotalItems={getTotalItems} cartOpen={cartOpen} setCartOpen={setCartOpen} cartItems={cartItems} setCartItems={setCartItems} onAdd={onAdd} />
                 <Routes>
                     <Route
                         exact
