@@ -38,6 +38,7 @@ const Product = ({ onAdd }) => {
                 <ImageGrid isLoading={isLoading} images={productInfo.image} />
             </Grid>
             <Grid
+                item
                 display={"flex"}
                 justifyContent={"center"}
                 alignItems={"center"}
@@ -63,7 +64,7 @@ const Product = ({ onAdd }) => {
                     <img src={productInfo.image} width="%100" height="100%" />
                 )}
             </Grid>
-            <Grid sm={3} height="500">
+            <Grid item sm={3} height="500">
                 <ProductDetails
                     title={productInfo.title}
                     description={productInfo.description}
