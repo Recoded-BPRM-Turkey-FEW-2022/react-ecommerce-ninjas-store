@@ -7,25 +7,26 @@ import ProductReview from "../components/productPage/ProductReview";
 import { Divider } from "@mui/material";
 import { useState, useEffect } from "react";
 import { BrowserRouter as Router, useParams } from "react-router-dom";
-
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 const Product = ({ onAdd }) => {
     const [productInfo, setProductInfo] = React.useState([]);
-
+    const [isLoading, setLoading] = useState(true);
     let { id } = useParams();
 
-    const fetchData = async () => {
-        fetch(`http://localhost:3005/products/${id}`)
+    const fetchData = () => {
+        fetch(`https://fakestoreapi.com/products/${id}`)
             .then((res) => res.json())
             .then((data) => {
                 // console.log(data);
                 setProductInfo(data);
+                setLoading(false);
             });
     };
 
     useEffect(() => {
         fetchData();
     }, []);
-
 
     return (
         <Grid
@@ -34,11 +35,33 @@ const Product = ({ onAdd }) => {
             style={{ maxWidth: 1100, margin: "30 auto" }}
         >
             <Grid item sm={1} height="500">
-                <ImageGrid images={productInfo.image} />
+                <ImageGrid isLoading={isLoading} images={productInfo.image} />
             </Grid>
-            <Grid sm={5} height="500">
+            <Grid
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                sm={5}
+                height="500"
+            >
                 {/* <MainImage src={selectedImage} /> */}
-                <img src={productInfo.image} width="%100" height="100%" />
+                {isLoading ? (
+                    <Box
+                        sx={{
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+
+                            marginRight: "100px",
+                            marginLeft: "100px",
+                            marginTop: "100px",
+                        }}
+                    >
+                        <CircularProgress />
+                    </Box>
+                ) : (
+                    <img src={productInfo.image} width="%100" height="100%" />
+                )}
             </Grid>
             <Grid sm={3} height="500">
                 <ProductDetails
