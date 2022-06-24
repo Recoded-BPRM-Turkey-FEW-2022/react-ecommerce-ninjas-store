@@ -80,8 +80,8 @@ export default function ButtonAppBar({
   }
 
   return (
-    <Box sx={{ flexGrow: 1}}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="sticky">
         <Toolbar>
           {/* <IconButton
             size="large"
@@ -92,12 +92,12 @@ export default function ButtonAppBar({
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Store
+          <Typography variant="h2" component="div" sx={{ flexGrow: 1 }}>
+            SIMPLEX
           </Typography>
 
           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="demo-select-small" style={{ color: "white" }}>
+            <InputLabel id="demo-select-small" style={{ color: "black" }}>
               Categorie
             </InputLabel>
             <Select
@@ -156,7 +156,7 @@ export default function ButtonAppBar({
           </FormControl>
 
           <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="filter-select-small" style={{ color: "white" }}>
+            <InputLabel id="filter-select-small" style={{ color: "black" }}>
               Filter by
             </InputLabel>
             <Select

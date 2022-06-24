@@ -18,6 +18,7 @@ import Cart from "./Cart";
 import Divider from "@mui/material/Divider";
 
 import { useNavigate, Link } from "react-router-dom";
+import { lightBlue } from "@mui/material/colors";
 
 export default function ButtonAppBar({
   products,
@@ -46,7 +47,7 @@ export default function ButtonAppBar({
   const filterHandleChange = (event) => {
     setfilter(event.target.value);
   };
-  
+
 
   // function categoriesFilter(categorie) {
   //   fetch(`http://localhost:3005/products /category/${categorie}`)
@@ -118,12 +119,16 @@ export default function ButtonAppBar({
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Toolbar>
+      <AppBar position="sticky" >
+        <Toolbar id='Toolbar' sx={{
+          backgroundColor: "lightblue",
+          color: "black",
+          height: 10,
+        }}>
           <Typography
-            variant="h6"
+            variant="h1"
             component="div"
-            sx={{ flexGrow: 1, cursor: "pointer" }}
+            sx={{ flexGrow: 1, cursor: "pointer", fontSize: 30 }}
             onClick={() => {
               navigate("/");
               noCatogorie();
@@ -133,37 +138,37 @@ export default function ButtonAppBar({
             }}
             style={{}}
           >
-            Store
+            SIMPLEX
           </Typography>
 
           {window.location.href === `http://localhost:3000/` ? (
             <Box
-            component="form"
-            sx={{
-              "& > :not(style)": { m: 1, width: "25ch" },
-            }}
-            noValidate
-            autoComplete="off"
-          >
-            <TextField
-              sx={{ input: { color: "white" } }}
-              InputLabelProps={{
-                style: { color: "#fff" },
+              component="form"
+              sx={{
+                "& > :not(style)": { m: 1, width: "25ch" },
               }}
-              id="search"
-              label="Search"
-              variant="standard"
-              name="name"
-              value={name}
-              onChange={(event) => {
-                setName(event.target.value);
-                searchByName();
-                setcategorie("");
-                setfilter("");
-              }}
-            />
-          </Box>)
-          : null
+              noValidate
+              autoComplete="off"
+            >
+              <TextField
+                sx={{ input: { color: "black" } }}
+                InputLabelProps={{
+                  style: { color: "grey" },
+                }}
+                id="search"
+                label="Search"
+                variant="standard"
+                name="name"
+                value={name}
+                onChange={(event) => {
+                  setName(event.target.value);
+                  searchByName();
+                  setcategorie("");
+                  setfilter("");
+                }}
+              />
+            </Box>)
+            : null
           }
 
           {/* <Box
@@ -175,7 +180,7 @@ export default function ButtonAppBar({
             autoComplete="off"
           >
             <TextField
-              sx={{ input: { color: "white" } }}
+              sx={{ input: { color: "black" } }}
               InputLabelProps={{
                 style: { color: "#fff" },
               }}
@@ -195,7 +200,7 @@ export default function ButtonAppBar({
 
           {window.location.href === `http://localhost:3000/` ? (
             <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
-              <InputLabel id="demo-select-small" style={{ color: "white" }}>
+              <InputLabel id="demo-select-small" style={{ color: "black" }}>
                 Categories
               </InputLabel>
               <Select
@@ -204,6 +209,9 @@ export default function ButtonAppBar({
                 value={categorie}
                 label="categorie"
                 onChange={categorieHandleChange}
+                sx={{
+                  backgroundColor: "lightBlue"
+                }}
               >
                 <MenuItem
                   value={0}
@@ -257,7 +265,7 @@ export default function ButtonAppBar({
 
           {window.location.href === `http://localhost:3000/` ? (
             <FormControl sx={{ m: 1, minWidth: 150 }} size="small">
-              <InputLabel id="filter-select-small" style={{ color: "white" }}>
+              <InputLabel id="filter-select-small" style={{ color: "black" }}>
                 Sort by
               </InputLabel>
               <Select

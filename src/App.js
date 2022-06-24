@@ -50,50 +50,47 @@ export default function App() {
         let badgeContent = cartItems.reduce((acc, item) => acc + item.qty, 0);
         return badgeContent;
     };
-
     return (
-        <Router>
-            <div>
-                <Navbar
-                    products={products}
-                    setProducts={setProducts}
-                    setCurrentCategorie={setCurrentCategorie}
-                    getTotalItems={getTotalItems}
-                    cartOpen={cartOpen}
-                    setCartOpen={setCartOpen}
-                    cartItems={cartItems}
-                    setCartItems={setCartItems}
-                    onAdd={onAdd}
+        <Router style={{ padding: 0 }}>
+            <Navbar
+                products={products}
+                setProducts={setProducts}
+                setCurrentCategorie={setCurrentCategorie}
+                getTotalItems={getTotalItems}
+                cartOpen={cartOpen}
+                setCartOpen={setCartOpen}
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+                onAdd={onAdd}
+            />
+            <Routes>
+                <Route
+                    exact
+                    path="/"
+                    element={
+                        <ProductCards
+                            products={products}
+                            currentCategorie={currentCategorie}
+                            isLoading={isLoading}
+                        />
+                    }
+                ></Route>
+                <Route
+                    exact
+                    path="/products/:id"
+                    element={<Product onAdd={onAdd} />}
                 />
-                <Routes>
-                    <Route
-                        exact
-                        path="/"
-                        element={
-                            <ProductCards
-                                products={products}
-                                currentCategorie={currentCategorie}
-                                isLoading={isLoading}
-                            />
-                        }
-                    ></Route>
-                    <Route
-                        exact
-                        path="/products/:id"
-                        element={<Product onAdd={onAdd} />}
-                    />
-                    <Route
-                        exact
-                        path="/ShoppingItem"
-                        element={
-                            <ShoppingItem
-                                cartItems={cartItems}
-                                setCartItems={setCartItems}
-                            />
-                        }
-                    ></Route>
-                </Routes>
-            </div>
+                <Route
+                    exact
+                    path="/ShoppingItem"
+                    element={
+                        <ShoppingItem
+                            cartItems={cartItems}
+                            setCartItems={setCartItems}
+                        />
+                    }
+                ></Route>
+            </Routes>
         </Router>
     );
 }
