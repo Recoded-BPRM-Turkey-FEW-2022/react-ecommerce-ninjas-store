@@ -80,7 +80,7 @@ export default function App() {
                     <Route
                         exact
                         path="/products/:id"
-                        element={<Product onAdd={onAdd} />}
+                        element={<Product onAdd={onAdd} products={products}/>}
                     />
                     <Route
                         exact
