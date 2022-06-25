@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useEffect } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -6,7 +6,6 @@ import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -19,6 +18,7 @@ import Divider from "@mui/material/Divider";
 
 import { useNavigate, Link } from "react-router-dom";
 import { lightBlue } from "@mui/material/colors";
+import { PrecisionManufacturing } from "@mui/icons-material";
 
 export default function ButtonAppBar({
   products,
@@ -35,7 +35,8 @@ export default function ButtonAppBar({
   const [filter, setfilter] = React.useState("");
   const [filteredProducts, setFilteredProducts] = React.useState(products);
   const [name, setName] = React.useState("");
-
+  // const [maxPrice, setMaxPrice] = React.useState(0);
+  let maxPrice;
   const navigate = useNavigate();
 
   const categorieHandleChange = (event) => {
@@ -114,7 +115,19 @@ export default function ButtonAppBar({
             product.title.toLowerCase().includes(name.toLowerCase())
           )
         );
+
       });
+  }
+  const pricing = (maxPrice) => {
+    console.log(maxPrice)
+    if (maxPrice > 0) {
+      const filteresByPrice = products.filter(
+        (product) => product.price < maxPrice
+      )
+      console.log(filteresByPrice)
+      setProducts(filteresByPrice)
+      console.log(products)
+    }
   }
 
   return (
@@ -165,6 +178,23 @@ export default function ButtonAppBar({
                   searchByName();
                   setcategorie("");
                   setfilter("");
+                }}
+              />
+              <TextField
+                sx={{ input: { color: "black" } }}
+                InputLabelProps={{
+                  style: { color: "grey" },
+                }}
+                id="search"
+                label="Search by price"
+                variant="standard"
+                name="maxPrice"
+                value={maxPrice}
+                onChange={(event) => {
+                  // setMaxPrice(event.target.value)
+                  maxPrice = event.target.value;
+                  searchByName()
+                  pricing(maxPrice)
                 }}
               />
             </Box>)
